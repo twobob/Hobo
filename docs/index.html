@@ -14,6 +14,7 @@
 <meta property="og:site_name" content="Hobo" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hobo" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 user = "twobob"
 repo = "Hobo"
@@ -26,8 +27,9 @@ $.ajax({
   context: document.body
 }).done(function(data) {
   res =    JSON.parse(data);
-  for file in res["tree"]:
+  for (file in res["tree"]){
       print(file["path"]);
+    }
 });
 </script>
 <script type="application/ld+json">
