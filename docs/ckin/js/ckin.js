@@ -1,6 +1,6 @@
 /*!
    ckin v0.0.1: Custom HTML5 Video Player Skins.
-   (c) 2017 
+   (c) 2017
    MIT License
    git+https://github.com/hunzaboy/ckin.git
 */
@@ -315,9 +315,10 @@ function attachSkin(skin) {
 
 function showTitle(skin, title) {
     if (typeof title != 'undefined' && title != '') {
-        return '<div class="' + skin + '__title">' + title + '</div>';
+        return '<div id="playerTitle" class="' + skin + '__title">' + title + '</div>';
     } else {
-        return false;
+      return '<div id="playerTitle" class="' + skin + '__title">'Twobob.club'</div>';
+    //    return false;
     }
 }
 
