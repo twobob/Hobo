@@ -17,18 +17,16 @@
 <meta property="twitter:title" content="Hobo" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-user = "twobob"
-repo = "Hobo"
+tracks = [];
+res = '';
+randomLink = '';
 url = "https://api.github.com/repos/twobob/Hobo/git/trees/main?recursive=1"
-// r = requests.get(url)
-var res = '';
-$.ajaxSetup({async: false});
+$.ajaxSetup({async: true});
 $.ajax({
   url: url,
   context: document.body
 }).done(function(data) {
   res =    data;
-  tracks = [];
 for (n=0; n < res["tree"].length; n++){
   var current = res["tree"][n]["path"];
   if (current.includes('.mp4')){
@@ -36,14 +34,14 @@ for (n=0; n < res["tree"].length; n++){
     console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   )
    }
   };
-  }
-);
+// now pick a random track
 randomIndex = Math.floor(Math.random() *(0,tracks.length));
 randomTrack = encodeURI(tracks[randomIndex]);
 randomLink = 'https://github.com/twobob/Hobo/blob/main/'+randomTrack+'?raw=true';
 
 document.getElementById('mainvideo').src = randomLink;
-
+  }
+);
 </script>
 <script type="application/ld+json">
 {"@type":"WebSite","headline":"Hobo","description":"DMCA free content for your feed","url":"https://twobob.github.io/Hobo","name":"Hobo","@context":"https://schema.org"}</script>
