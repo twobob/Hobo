@@ -131,9 +131,10 @@ tidyname = trimmedString(  decodeURI(returnSelectedTrack()).replace('mp4/','').r
 $('.post-list-heading')[0].textContent =tidyname;
 document.getElementById('main-video').setAttribute('data-title',tidyname);
 document.getElementById('playerTitle').innerHTML = tidyname;
-document.getElementById('main-video').setAttribute('poster', '');
+
 document.getElementById('main-video').src = randomLink;
 
+document.getElementById('main-video').setAttribute('poster', '');
 // add the lazy loading last
 
 // $('.lazy').lazyload({
