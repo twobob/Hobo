@@ -12,7 +12,7 @@ dl, dd, ol, ul, figure {
  */
 body {
   font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #fdfdfd;
+  color: ##d0bdbd;
   background-color: #111;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
@@ -313,6 +313,10 @@ table {
 
 .page-heading {
   font-size: 32px; }
+
+.linkable{
+  	font-weight: 400;
+}  
 
 .post-list-heading {
   font-size: 28px; }
