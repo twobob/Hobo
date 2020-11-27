@@ -40,12 +40,12 @@ function returnSelectedTrack(){
   return randomTrack;
 }
 
-function addLink(link, selector){
+function addLink(link, linkText, selector){
 
  mydiv = document.createElement('div')
  mylink = document.createElement('a')
 
- newContent = document.createTextNode("link for "+trimmedString(link,15));
+ newContent = document.createTextNode("link for "+trimmedString(linkText,35));
 
  mylink.appendChild(newContent);
  mylink.href = link;
@@ -72,7 +72,7 @@ for (n=0; n < res["tree"].length; n++){
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
     console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   );
-addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"]), 'list' );
+addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"]),res["tree"][n]["path"], 'list' );
    }
   };
 // now pick a random track
@@ -81,6 +81,7 @@ randomTrack = encodeURI(tracks[randomIndex]);
 randomLink = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
 
 document.getElementById('main-video').setAttribute('data-title', returnSelectedTrack());
+document.getElementById('main-video').setAttribute('poster', '');
 document.getElementById('main-video').src = randomLink;
 
 search2 = [
