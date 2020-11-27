@@ -40,10 +40,10 @@ function addLink(link, selector){
 
  newContent = document.createTextNode("link for "+mylink);
 
- a.appendChild(newContent);
- a.href = link;
+ mylink.appendChild(newContent);
+ mylink.href = link;
 
- mydiv.appendChild(a);
+ mydiv.appendChild(mylink);
  $(selector).appendChild(mydiv);
  }
 
