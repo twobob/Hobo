@@ -87,7 +87,7 @@ addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"
 
 if (trParam){
   // now pick the relevant track
-randomIndex =  tracks.indexOf(base64_decode(trParam)));
+randomIndex =  tracks.indexOf(base64_decode(trParam));
 }
 
 if (!trParam || randomIndex < 0 || randomIndex > tracks.length )
