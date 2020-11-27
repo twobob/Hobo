@@ -41,7 +41,9 @@ randomIndex = Math.floor(Math.random() *(0,tracks.length));
 randomTrack = encodeURI(tracks[randomIndex]);
 randomLink = 'https://github.com/twobob/Hobo/blob/main/'+randomTrack+'?raw=true';
 
+document.getElementById('main-video').setAttribute('data-title', randomTrack);
 document.getElementById('main-video').src = randomLink;
+
   }
 );
 </script>
