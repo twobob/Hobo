@@ -46,10 +46,10 @@ for (n=0; n < res["tree"].length; n++){
 // now pick a random track
 randomIndex = Math.floor(Math.random() *(0,tracks.length));
 randomTrack = encodeURI(tracks[randomIndex]);
-randomLink = 'https://github.com/twobob/Hobo/blob/main/'+randomTrack+'?raw=true';
+randomLink = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
 
 document.getElementById('main-video').setAttribute('data-title', returnSelectedTrack());
-document.getElementById('main-video').src = returnSelectedTrack();
+document.getElementById('main-video').src = randomLink;
 
 search2 = [
   "7m 120BPM Ambient Driven Pulses.mp3",
@@ -300,7 +300,7 @@ search2 = [
         <!-- poster="ckin.jpg"  -->
 
   <video id="main-video" src="https://github.com/twobob/Hobo/blob/main/mp4/86%20Fireflies.mp4?raw=true"
-  data-overlay="1" data-title="javascript:returnSelectedTrack()"></video>
+  data-overlay="1" data-title=""></video>
     <p class="rss-subscribe">subscribe <a href="/Hobo/feed.xml">via RSS</a></p></div>
 
       </div>
