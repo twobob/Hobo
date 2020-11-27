@@ -17,7 +17,7 @@
 <meta property="twitter:title" content="Hobo" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://twobob.github.io/Hobo/js/jquery.lazyload.any.js"></script>
+<script type="text/javascript" src="js/jquery.lazyload.any.js"></script>
 <script type="text/javascript">
 
 //helper
@@ -44,6 +44,8 @@ function returnSelectedTrack(){
 function addLink(link, linkText, selector){
 
  mydiv = document.createElement('div')
+ mydiv.classList.add('lazy');
+
  mylink = document.createElement('a')
 
  newContent = document.createTextNode("link for "+trimmedString(linkText,35));
@@ -300,7 +302,7 @@ search2 = [
   }
 );
 
-$('#list').lazyload({
+$('.lazy').lazyload({
   // Sets the pixels to load earlier. Setting threshold to 200 causes image to load 200 pixels
   // before it appears on viewport. It should be greater or equal zero.
   threshold: 200,
