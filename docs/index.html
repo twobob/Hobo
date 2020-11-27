@@ -69,14 +69,16 @@ function addLink(link, linkText, selector){
 
  mydiv.style = "width: 50%;  	display: inline-block;  	vertical-align: top; 	height: 350px;  ";
 
+ myimg= document.createElement('img');
 
+ myimg.src= linkText.replace('mp4/','art/').replace('.mp4','.jpg');
  //mydiv.classList.add('lazy');
 
  mylink = document.createElement('a')
 
  //document.getElementById(selector).children.length;
 
- newContent = document.createTextNode("link for "+trimmedString(linkText,75));
+ newContent = document.createTextNode("link for "+trimmedString(linkText.replace('mp4/','').replace('.mp4',''),75));
 
  mylink.appendChild(newContent);
  mylink.href = link;
