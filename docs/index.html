@@ -75,7 +75,7 @@ function addLink(link, linkText, selector){
  //mydiv.classList.add('lazy');
 
  mylink = document.createElement('a')
-
+ mylink.appendChild(myimg);
  //document.getElementById(selector).children.length;
 
  newContent = document.createTextNode("link for "+trimmedString(linkText.replace('mp4/','').replace('.mp4',''),75));
