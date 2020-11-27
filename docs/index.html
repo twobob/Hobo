@@ -102,16 +102,17 @@ for (n=0; n < res["tree"].length; n++){
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
     // console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   );
-addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"]),res["tree"][n]["path"], 'list' );
    }
   };
 
-// Shuffle now before we count
+// Shuffle now before we count and build links
 var shuffledtracks = shuffleArray( tracks );
+for (n=0; n < shuffledtracks.length; n++){
+addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(shuffledtracks[n]), shuffledtracks[n], 'list' );
+   }
+
 // assign it back;
 tracks = shuffledtracks;
-
-
 
 if (trParam){
   // now pick the relevant track
