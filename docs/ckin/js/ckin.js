@@ -317,7 +317,7 @@ function showTitle(skin, title) {
     if (typeof title != 'undefined' && title != '') {
         return '<div id="playerTitle" class="' + skin + '__title">' + title + '</div>';
     } else {
-      return '<div id="playerTitle" class="' + skin + '__title">'Twobob.club'</div>';
+      return '<div id="playerTitle" class="' + skin + '__title">Twobob.club</div>';
     //    return false;
     }
 }
