@@ -28,9 +28,16 @@ $.ajax({
 }).done(function(data) {
   res =    data;
   tracks = [];
-for (n=0; n < res["tree"].length; n++){  var current = res["tree"][n]["path"]; if (current.includes('.mp4')){  tracks.push(res["tree"][n]["path"]) ;   console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   )   }   };
-    }
-});
+for (n=0; n < res["tree"].length; n++){
+  var current = res["tree"][n]["path"];
+  if (current.includes('.mp4')){
+    tracks.push(res["tree"][n]["path"]) ;
+    console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   )
+   }
+  };
+  }
+);
+
 </script>
 <script type="application/ld+json">
 {"@type":"WebSite","headline":"Hobo","description":"DMCA free content for your feed","url":"https://twobob.github.io/Hobo","name":"Hobo","@context":"https://schema.org"}</script>
