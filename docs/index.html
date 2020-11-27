@@ -78,6 +78,10 @@ function addLink(link, linkText, selector){
  mylink.appendChild(myimg);
  //document.getElementById(selector).children.length;
 
+ newContent = document.createTextNode("link for "+trimmedString(linkText.replace('mp4/','').replace('.mp4',''),75));
+
+ mylink.appendChild(newContent);
+
  myimg.title =  mylink.title = "link for "+trimmedString(linkText.replace('mp4/','').replace('.mp4',''),75);
 
  mylink.href = link;
