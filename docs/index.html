@@ -65,7 +65,7 @@ for (n=0; n < res["tree"].length; n++){
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
     console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   );
-addLink('https://api.github.com/repos/twobob/Hobo/&tr'+base64_encode(res["tree"][n]["path"]), 'list' );
+addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"]), 'list' );
    }
   };
 // now pick a random track
