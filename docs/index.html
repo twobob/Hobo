@@ -29,6 +29,25 @@ const base64_decode = data => {
 const urlParams = new URLSearchParams(window.location.search);
 const trParam = urlParams.get('tr');
 
+function shuffleArray ( array ) {
+    var counter = array.length, temp, index;
+    // While there are elements in the array
+    while ( counter > 0 ) {
+        // Pick a random index
+        index = Math.floor( Math.random() * counter );
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        temp = array[ counter ];
+        array[ counter ] = array[ index ];
+        array[ index ] = temp;
+    }
+    return array;
+}
+
+
 function trimmedString(clip, maxlen)
                     {
                     return clip.length > maxlen ?
@@ -86,6 +105,13 @@ for (n=0; n < res["tree"].length; n++){
 addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(res["tree"][n]["path"]),res["tree"][n]["path"], 'list' );
    }
   };
+
+// Shuffle now before we count
+var shuffledtracks = shuffleArray( tracks );
+// assign it back;
+tracks = shuffledtracks;
+
+
 
 if (trParam){
   // now pick the relevant track
