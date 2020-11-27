@@ -27,6 +27,13 @@ const base64_decode = data => {
   return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
 };
 
+function trimmedString(clip, maxlen)
+                    {
+                    return clip.length > maxlen ?
+                    clip.substring(0, maxlen - 1) + "…" :
+                    clip;
+}
+
 randomTrack = '';
 
 function returnSelectedTrack(){
@@ -38,7 +45,7 @@ function addLink(link, selector){
  mydiv = document.createElement('div')
  mylink = document.createElement('a')
 
- newContent = document.createTextNode("link for "+link);
+ newContent = document.createTextNode("link for "+trimmedString(link,15));
 
  mylink.appendChild(newContent);
  mylink.href = link;
