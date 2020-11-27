@@ -16,13 +16,37 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hobo" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+//helper
+  const base64_encode = text => {
+  return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
+};
+const base64_decode = data => {
+  return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+};
 
 randomTrack = '';
 
 function returnSelectedTrack(){
   return randomTrack;
 }
+
+function addLink(link, selector){
+
+ mydiv = document.createElement('div')
+ myilnk = document.createElement('a')
+
+ newContent = document.createTextNode("link for "+mylink);
+
+ a.appendChild(newContent);
+ a.href = link;
+
+ mydiv.appendChild(a);
+ $(selector).appendChild(mydiv);
+ }
+
 
 tracks = [];
 search = [];
@@ -40,7 +64,8 @@ for (n=0; n < res["tree"].length; n++){
   if (current.includes('.mp4')){
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
-    console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   )
+    console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   );
+addLink('https://api.github.com/repos/twobob/Hobo/&tr'+base64_encode(res["tree"][n]["path"]), 'list' );
    }
   };
 // now pick a random track
@@ -301,6 +326,9 @@ search2 = [
 
   <video id="main-video" src="https://github.com/twobob/Hobo/blob/main/mp4/86%20Fireflies.mp4?raw=true"
   data-overlay="1" data-title=""></video>
+  <div id ="list"></div>
+
+
     <p class="rss-subscribe">subscribe <a href="/Hobo/feed.xml">via RSS</a></p></div>
 
       </div>
