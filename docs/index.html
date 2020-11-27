@@ -42,7 +42,7 @@ randomIndex = Math.floor(Math.random() *(0,tracks.length));
 randomTrack = encodeURI(tracks[randomIndex]);
 randomLink = 'https://github.com/twobob/Hobo/blob/main/'+randomTrack+'?raw=true';
 
-$('.mainvideo').src # randomLink;
+document.getElementById('mainvideo').src = randomLink;
 
 </script>
 <script type="application/ld+json">
