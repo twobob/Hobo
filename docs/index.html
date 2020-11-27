@@ -99,7 +99,8 @@ randomIndex = Math.floor(Math.random() *(0,tracks.length));
 randomTrack = encodeURI(tracks[randomIndex]);
 randomLink = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
 
-document.getElementById('main-video').setAttribute('data-title', returnSelectedTrack());
+document.getElementById('main-video').setAttribute('data-title', returnSelectedTrack().replace('mp4/','').replace('.mp4','.mp3'));
+document.getElementById('playerTitle').innerHTML = returnSelectedTrack().replace('mp4/','').replace('.mp4','.mp3');
 document.getElementById('main-video').setAttribute('poster', '');
 document.getElementById('main-video').src = randomLink;
 
