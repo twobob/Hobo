@@ -27,8 +27,8 @@ $.ajax({
   context: document.body
 }).done(function(data) {
   res =    data;
-  for (file in res["tree"]){
-      print(file["path"]);
+  tracks = [];
+for (n=0; n < res["tree"].length; n++){  var current = res["tree"][n]["path"]; if (current.includes('.mp4')){  tracks.push(res["tree"][n]["path"]) ;   console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   )   }   };
     }
 });
 </script>
