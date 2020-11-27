@@ -38,6 +38,11 @@ for (n=0; n < res["tree"].length; n++){
   };
   }
 );
+randomIndex = Math.floor(Math.random() *(0,tracks.length));
+randomTrack = encodeURI(tracks[randomIndex]);
+randomLink = 'https://github.com/twobob/Hobo/blob/main/'+randomTrack+'?raw=true';
+
+$('.mainvideo').src # randomLink;
 
 </script>
 <script type="application/ld+json">
@@ -72,7 +77,8 @@ for (n=0; n < res["tree"].length; n++){
           </a>
         </h3></li></ul>
         <!-- poster="ckin.jpg"  -->
-  <video src="https://github.com/twobob/Hobo/blob/main/mp4/86%20Fireflies.mp4?raw=true"
+
+  <video id="main-video" src="https://github.com/twobob/Hobo/blob/main/mp4/86%20Fireflies.mp4?raw=true"
   data-overlay="1" data-title="Test..."></video>
     <p class="rss-subscribe">subscribe <a href="/Hobo/feed.xml">via RSS</a></p></div>
 
