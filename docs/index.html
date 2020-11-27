@@ -14,6 +14,22 @@
 <meta property="og:site_name" content="Hobo" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hobo" />
+<script type="text/javascript">
+user = "twobob"
+repo = "Hobo"
+url = "https://api.github.com/repos/{}/{}/git/trees/main?recursive=1".format(user, repo)
+// r = requests.get(url)
+var res = '';
+$.ajaxSetup({async: false});
+$.ajax({
+  url: url,
+  context: document.body
+}).done(function(data) {
+  res =    JSON.parse(data);
+  for file in res["tree"]:
+      print(file["path"]);
+});
+</script>
 <script type="application/ld+json">
 {"@type":"WebSite","headline":"Hobo","description":"DMCA free content for your feed","url":"http://localhost:4000/Hobo/","name":"Hobo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
