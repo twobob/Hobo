@@ -68,7 +68,7 @@ randomIndex++;
 randomIndex = randomIndex%(tracks.length-1);
 
 currentTrack = encodeURI(tracks[randomIndex]);
-changeVideo();
+changeVideo( true);
 }
 
 function addLink(link, linkText, selector){
@@ -100,17 +100,18 @@ function addLink(link, linkText, selector){
  document.getElementById(selector).appendChild(mydiv);
  }
 
-function changeVideo(){
+function changeVideo(autoplay = false){
 
   linkForVideo = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
   tidynameForVideo = trimmedString(  decodeURI(returnSelectedTrack()).replace('mp4/','').replace('.mp4','') , 55) ;
 
   document.getElementById('main-video').src = linkForVideo;
+if (autoplay) document.getElementById('main-video').play();
+
 
   $('.post-list-heading')[0].textContent =tidynameForVideo;
   document.getElementById('main-video').setAttribute('data-title',tidynameForVideo);
   document.getElementById('playerTitle').innerHTML = 'TRK: '+randomIndex+' :'+ tidynameForVideo;
-
 
   // use the event object
   $('#main-video').bind('loadeddata', function(e) {
