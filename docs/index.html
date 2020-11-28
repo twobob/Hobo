@@ -435,9 +435,27 @@ search2 = [
 <script type="application/ld+json">
 {"@type":"WebSite","headline":"Twobobs Hobo","description":"DMCA free content for your feed","url":"https://twobob.github.io/Hobo","name":"Twobobs Hobo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Hobo/assets/main.css">
-<!-- Add failover -->
-<link rel="stylesheet" href="https://twobob.github.io/Hobo/assets/main.css">
+
+<script>
+     function CssOrScriptFallBack(el) {
+         if (el instanceof HTMLScriptElement || el instanceof HTMLLinkElement) {
+             let Url = el.getAttribute('data-fallback');
+             if (Url) {
+                 let attr = el instanceof HTMLScriptElement ? 'src' : 'href';
+                 el.setAttribute(attr, Url);
+             }
+         }
+     }
+ </script>
+
+ <link href='/Hobo/docs/assets/main.css' rel='stylesheet'
+       onerror='CssOrScriptFallBack(this)'
+       data-fallback='https://twobob.github.io/Hobo/assets/main.css' />
+
+       <link href='/Hobo/docs/ckin/css/ckin.css' rel='stylesheet'
+             onerror='CssOrScriptFallBack(this)'
+             data-fallback='https://twobob.github.io/Hobo/ckin/css/ckin.css' />
+
 
 <link type="application/atom+xml" rel="alternate" href="https://twobob.github.io/Hobo/feed.xml" title="Twobobs Hobo" />
 </head>
@@ -458,7 +476,7 @@ search2 = [
 
         <!-- <div class="trigger"><a class="page-link" href="/Hobo/about/">About</a></div> -->
       </nav></div>
-      <link rel="stylesheet" href="ckin/css/ckin.css">
+
 </head>
 </header>
 <main class="page-content" aria-label="Content">
@@ -484,7 +502,7 @@ function updateLayout(amount){
 
   <fieldset>
         <div class="radio-holder">
-  
+
           <button class="radio-button" onclick="updateLayout(2)">2</button></input>
 
           <button  class="radio-button" onclick="updateLayout(3)">3</button></input>
