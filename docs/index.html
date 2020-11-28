@@ -56,9 +56,19 @@ function trimmedString(clip, maxlen)
 }
 
 randomTrack = '';
+currentTrack = '';
 
 function returnSelectedTrack(){
-  return randomTrack;
+  return currentTrack;
+}
+
+function PlayNextTrack(){
+
+randomIndex++;
+randomIndex = randomIndex%(tracks.length-1);
+
+currentTrack = encodeURI(tracks[randomIndex]);
+changeVideo();
 }
 
 function addLink(link, linkText, selector){
@@ -90,11 +100,32 @@ function addLink(link, linkText, selector){
  document.getElementById(selector).appendChild(mydiv);
  }
 
+function changeVideo(){
+
+  linkForVideo = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
+  tidynameForVideo = trimmedString(  decodeURI(returnSelectedTrack()).replace('mp4/','').replace('.mp4','') , 55) ;
+
+  document.getElementById('main-video').src = linkForVideo;
+
+  $('.post-list-heading')[0].textContent =tidynameForVideo;
+  document.getElementById('main-video').setAttribute('data-title',tidynameForVideo);
+  document.getElementById('playerTitle').innerHTML = 'TRK: '+randomIndex+' :'+ tidynameForVideo;
+
+
+  // use the event object
+  $('#main-video').bind('loadeddata', function(e) {
+  document.getElementById('main-video').setAttribute('poster', '');
+    // console.log(e.target.duration);
+  });
+
+}
+
+
 
 tracks = [];
 search = [];
 res = '';
-randomLink = '';
+
 url = "https://api.github.com/repos/twobob/Hobo/git/trees/main?recursive=1"
 $.ajaxSetup({async: true});
 $.ajax({
@@ -131,22 +162,15 @@ if (!trParam || randomIndex < 0 || randomIndex > tracks.length )
 randomIndex = Math.floor(Math.random() *(0,tracks.length));
 }
 
-randomTrack = encodeURI(tracks[randomIndex]);
-randomLink = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
 
-tidyname = trimmedString(  decodeURI(returnSelectedTrack()).replace('mp4/','').replace('.mp4','') , 55) ;
-$('.post-list-heading')[0].textContent =tidyname;
-document.getElementById('main-video').setAttribute('data-title',tidyname);
-document.getElementById('playerTitle').innerHTML = tidyname;
+currentTrack = randomTrack = encodeURI(tracks[randomIndex]);
 
-document.getElementById('main-video').src = randomLink;
+changeVideo();
 
-// use the event object
-$('#main-video').bind('loadeddata', function(e) {
-document.getElementById('main-video').setAttribute('poster', '');
-  // console.log(e.target.duration);
-});
-
+// setup the onended event for the video.
+document.getElementById('main-video').onended = function(e) {
+  PlayNextTrack();
+};
 
 
 // add the lazy loading last
