@@ -102,6 +102,8 @@ function addLink(link, linkText, selector){
 
 function changeVideo(autoplay = false){
 
+  document.getElementById('main-video').setAttribute('poster', "/Hobo/assets/player.png");
+
   linkForVideo = 'https://github.com/twobob/Hobo/blob/main/'+returnSelectedTrack()+'?raw=true';
   tidynameForVideo = trimmedString(  decodeURI(returnSelectedTrack()).replace('mp4/','').replace('.mp4','') , 55) ;
 
