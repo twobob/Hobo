@@ -316,10 +316,10 @@ function attachSkin(skin) {
 function showTitle(skin, title) {
     if (typeof title != 'undefined' && title != '') {
         return '<div id="playerTitle" class="' + skin + '__title">' + title + '</div>'+
-        '<div id="playerTitle" class="default__title2"><a href="javascript:PlayNextTrack()">PLAY NEXT TRACK</a></div>';
+        '<div id="playerTitle" class="default__title2"><a href="javascript:PlayNextTrack()">»NEXT TRACK»</a></div>';
     } else {
       return '<div id="playerTitle" class="' + skin + '__title">Twobob.club</div>'+
-      '<div id="playerTitle" class="default__title2"><a href="javascript:PlayNextTrack()">PLAY NEXT TRACK</a></div>';
+      '<div id="playerTitle" class="default__title2"><a href="javascript:PlayNextTrack()">»NEXT TRACK»</a></div>';
     //    return false;
     }
 }

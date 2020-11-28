@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #5a7af2;
+  color: #bdad99;
   text-decoration: none; }
   a:visited {
     color: #5756c9; }
@@ -314,6 +314,8 @@ table {
 .page-heading {
   font-size: 32px; }
 
+
+
   .default__title2 {
   	position: absolute;
   	right: 20px;
@@ -321,8 +323,12 @@ table {
   	z-index: 1;
   	font-size: 24px;
   	color: rgba(255, 255, 255, 0.8);
-  	font-style: italic;
+  	background-color: #80808052;
+  	border-radius: 5px;
+  	padding-left: 10px;
+  	padding-right: 10px;
   }
+
 
 .linkable {
   	font-weight: 400;
