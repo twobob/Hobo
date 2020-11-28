@@ -314,6 +314,16 @@ table {
 .page-heading {
   font-size: 32px; }
 
+  .default__title2 {
+  	position: absolute;
+  	right: 20px;
+  	top: 20px;
+  	z-index: 1;
+  	font-size: 24px;
+  	color: rgba(255, 255, 255, 0.8);
+  	font-style: italic;
+  }
+
 .linkable {
   	font-weight: 400;
   	border: 5px;
