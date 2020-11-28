@@ -91,7 +91,7 @@ if (linkText.lastIndexOf('/') != -1){
 artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
 }
 
- myimg.src= artfile.replace('.mp4','.jpg');
+ myimg.src= 'art/'+artfile.replace('.mp4','.jpg');
  //mydiv.classList.add('lazy');
 
  mylink = document.createElement('a')
