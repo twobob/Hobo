@@ -135,7 +135,7 @@ if (autoplay) document.getElementById('main-video').play();
   // use the event object
   $('#main-video').bind('loadeddata', function(e) {
   document.getElementById('main-video').setAttribute('poster', '');
-    // console.log(e.target.duration);
+     console.log(e.target.duration);
   });
 
 }
@@ -496,7 +496,7 @@ search2 = [
 
 <script type="text/javascript">
 function updateLayout(amount){
-  $('.linkable').each( function(ind, el){ console.log(el);  el.style.maxWidth = (100 / amount)+'%'});
+  $('.linkable').each( function(ind, el){ el.style.maxWidth = (100 / amount)+'%'});
 }
 </script>
 
