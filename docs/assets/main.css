@@ -97,29 +97,14 @@ a {
             border: 1px dotted #333;
           }
 
-          .radio-holder {
-            float: left;
+          .radio-button {
+            /* float: left; */
             clear: none;
+            float: left;
+            width: calc(100% / 7);
           }
 
-          .radio-label {
-          	width: 9%;
-          	display: inline flow-root list-item;
-          }
 
-          label {
-            float: left;
-            clear: none;
-            display: block;
-            padding: 0px 1em 0px 8px;
-          }
-
-          input[type=radio],
-          input.radio {
-            float: left;
-            clear: none;
-            margin: 2px 0 0 2px;
-          }
 
 
 
