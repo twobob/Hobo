@@ -108,10 +108,9 @@ function changeVideo(autoplay = false){
   document.getElementById('main-video').src = linkForVideo;
 if (autoplay) document.getElementById('main-video').play();
 
-
   $('.post-list-heading')[0].textContent =tidynameForVideo;
   document.getElementById('main-video').setAttribute('data-title',tidynameForVideo);
-  document.getElementById('playerTitle').innerHTML = 'TRK: '+randomIndex+' :'+ tidynameForVideo;
+  document.getElementById('playerTitle').innerHTML = 'TRK: '+randomIndex+' :'+ trimmedString(tidynameForVideo,25);
 
   // use the event object
   $('#main-video').bind('loadeddata', function(e) {
