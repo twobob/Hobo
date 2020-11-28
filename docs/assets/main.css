@@ -102,6 +102,10 @@ a {
             clear: none;
             float: left;
             width: calc(100% / 7);
+            background-image: url('../art/ButtonBackground.png');
+            border: 0;
+            color: seashell;
+            background-size: 100%;
           }
 
 
