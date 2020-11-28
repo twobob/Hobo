@@ -137,9 +137,14 @@ $.ajax({
 for (n=0; n < res["tree"].length; n++){
   var current = res["tree"][n]["path"];
   if (current.includes('.mp4')){
+
+// uncomment to elide the short Twitter clips
+//    if(! current.includes('twitter')
+//    {
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
-    // console.log(   tracks[tracks.length]   /*   res["tree"][n]["path"]  */   );
+      // }
+
    }
   };
 
