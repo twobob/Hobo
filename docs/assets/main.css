@@ -329,6 +329,17 @@ table {
   	padding-right: 10px;
   }
 
+.insert-link{
+  position: relative;
+  top: -25px;
+  color: black;
+  left: 5px;
+  background: #ffffff7a;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 
 .linkable {
 
@@ -341,14 +352,6 @@ table {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 10px solid #111;
-
-	  margin-bottom: 15px;
-
-  	/* border: 5px;
-  	padding: 5px;
-  	margin-right: 8px;
-
-  	margin-left: 8px; */
 
   }
 

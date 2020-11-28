@@ -99,6 +99,7 @@ artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
  //document.getElementById(selector).children.length;
 
  myspan = document.createElement('span')
+ myspan.classList.add('insert-link');
  myspan.style = 'white-space: nowrap';
 
  newContent = document.createTextNode(trimmedString(linkText.replace('mp4/','').replace('.mp4',''),35));
