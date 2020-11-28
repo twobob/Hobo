@@ -81,7 +81,17 @@ function addLink(link, linkText, selector){
 
  myimg= document.createElement('img');
 
- myimg.src= linkText.replace('mp4/','art/').replace('twitter/','art/').replace('.mp4','.jpg');
+// one thought is a  String.lastIndexOf() on / here to simply replace any folder with art/
+// another would be to split on / and use the last array entry
+// this has the advantage of allowing for multiple nested subdirs to still resolve to just art/
+
+// strip all pathing
+artfile = linkText;
+if (linkText.lastIndexOf('/') != -1){
+artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
+}
+
+ myimg.src= artfile.replace('.mp4','.jpg');
  //mydiv.classList.add('lazy');
 
  mylink = document.createElement('a')
