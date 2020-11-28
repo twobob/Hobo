@@ -81,6 +81,9 @@ function addLink(link, linkText, selector){
 
  myimg= document.createElement('img');
 
+
+myimg.classList.addClass('splash');
+myimg.classList.addClass('splashWidth');
 // one thought is a  String.lastIndexOf() on / here to simply replace any folder with art/
 // another would be to split on / and use the last array entry
 // this has the advantage of allowing for multiple nested subdirs to still resolve to just art/

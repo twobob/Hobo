@@ -44,8 +44,9 @@ main {
  * Images
  */
 img {
-  max-width: 100%;
-  vertical-align: middle; }
+  /* max-width: 100%;
+  vertical-align: middle;  */
+}
 
 /**
  * Figures
@@ -314,8 +315,6 @@ table {
 .page-heading {
   font-size: 32px; }
 
-
-
   .default__title2 {
   	position: absolute;
   	right: 20px;
@@ -340,6 +339,15 @@ table {
   padding-right: 5px;
 }
 
+.splash{
+/* max-width: 100%; */
+vertical-align: middle;
+margin-bottom: -25px;
+}
+
+.splashWidth{
+max-width: 100%;
+}
 
 .linkable {
 
