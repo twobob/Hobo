@@ -55,7 +55,7 @@ function copyToClipboard(text) {
 }
 
 
-function runCopy(){  	copyToClipboard("  '"+base64_encode(tracks[randomIndex])+"',  "  );  }
+function runCopy(){  	copyToClipboard("  '"+tracks[randomIndex]+"',  "  );  }
 
 
 
@@ -101,19 +101,21 @@ currentTrack = encodeURI(tracks[randomIndex]);
 changeVideo( true);
 }
 
-var drums = [       'bXA0L1N0cm9ua2VyLm1wNA=='];
+var drums = [       'bXA0LzEzbTIwcyBEZW1vbmljIERhcmsgQWJzdHJhY3QgQml6emFyZSBUdW5pbmdzIFF1aXJreS5tcDQ=',      'bXA0LzEzbTE1cyA5MEJwbSAzb3ZlcjQgQnJpZ2h0V2hpdGVMaWdodERhd25FbWVyZ2VuY2VUcmFucXVpbGl0eVBlYWNlQ2FsbUFtYmllbmNlLm1wNA==',    'bXA0LzEwbTQ1cyA3NUJQTSBEYXJrIE1vb2R5IFR1bmUubXA0'  ];
 
-var vocal = [       'bXA0L1N0cm9ua2VyLm1wNA=='];
+var vocal = [     'bXA0LzEzbTIwcyBEZW1vbmljIERhcmsgQWJzdHJhY3QgQml6emFyZSBUdW5pbmdzIFF1aXJreS5tcDQ=',     'bXA0LzEzbTE1cyA5MEJwbSAzb3ZlcjQgQnJpZ2h0V2hpdGVMaWdodERhd25FbWVyZ2VuY2VUcmFucXVpbGl0eVBlYWNlQ2FsbUFtYmllbmNlLm1wNA=='    ];
 
-var ambient = [     'bXA0L1N0cm9ua2VyLm1wNA=='];
+var ambient = [    'bXA0LzEzbTE1cyA5MEJwbSAzb3ZlcjQgQnJpZ2h0V2hpdGVMaWdodERhd25FbWVyZ2VuY2VUcmFucXVpbGl0eVBlYWNlQ2FsbUFtYmllbmNlLm1wNA=='    ];
 
-var uptempo = [     'bXA0L1N0cm9ua2VyLm1wNA=='];
+var soundtrack = [      'bXA0LzEzbTIwcyBEZW1vbmljIERhcmsgQWJzdHJhY3QgQml6emFyZSBUdW5pbmdzIFF1aXJreS5tcDQ=',   'bXA0LzEzbTE1cyA5MEJwbSAzb3ZlcjQgQnJpZ2h0V2hpdGVMaWdodERhd25FbWVyZ2VuY2VUcmFucXVpbGl0eVBlYWNlQ2FsbUFtYmllbmNlLm1wNA==',    'bXA0LzEwbTQ1cyA3NUJQTSBEYXJrIE1vb2R5IFR1bmUubXA0'  ];
 
-var edm = [         'bXA0L1N0cm9ua2VyLm1wNA=='];
+var uptempo = [    ];
 
-var collab = [      'bXA0L1N0cm9ua2VyLm1wNA=='];
+var edm = [         ];
 
-var dark = [        'bXA0L1N0cm9ua2VyLm1wNA=='];
+var collab = [      ];
+
+var dark = [        'bXA0LzEzbTIwcyBEZW1vbmljIERhcmsgQWJzdHJhY3QgQml6emFyZSBUdW5pbmdzIFF1aXJreS5tcDQ=',      'bXA0LzEwbTQ1cyA3NUJQTSBEYXJrIE1vb2R5IFR1bmUubXA0'  ];
 
 function themeDiv(thearrary, thestring, thediv, theclass, theotherclass = ''){
 
@@ -136,6 +138,8 @@ trackname = link.replace('https://twobob.github.io/Hobo/?tr=','');
 themeDiv(edm, trackname, mydiv,  'playlist-edm' );
 
 themeDiv(ambient, trackname, mydiv,  'playlist-ambient' );
+
+themeDiv(ambient, trackname, mydiv,  'playlist-soundtrack' );
 
 themeDiv(uptempo, trackname, mydiv,  'playlist-uptempo', 'playlist-downtempo' );
 
