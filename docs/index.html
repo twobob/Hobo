@@ -85,6 +85,17 @@ var collab = [      'bXA0L1N0cm9ua2VyLm1wNA=='];
 
 var dark = [        'bXA0L1N0cm9ua2VyLm1wNA=='];
 
+function themeDiv(thearrary, thestring, thediv, theclass, theotherclass = ''){
+
+  if ( thearrary.includes(thestring)  )
+  {
+  thediv.classList.add(theclass);
+  }
+  else if (theotherclass != '') {
+  thediv.classList.add(theotherclass);
+  }
+}
+
 
 function addLink(link, linkText, selector){
 
@@ -92,43 +103,16 @@ trackname = link.replace('https://twobob.github.io/Hobo/?tr=','');
 
  mydiv = document.createElement('div');
 
- if ( edm.includes(trackname)  )
- {
- mydiv.classList.add('playlist-edm');
- }
+themeDiv(edm, trackname, mydiv,  'playlist-edm' );
 
+themeDiv(ambient, trackname, mydiv,  'playlist-ambient' );
 
-if ( ambient.includes(trackname)  )
-{
-mydiv.classList.add('playlist-ambient');
-}
+themeDiv(uptempo, trackname, mydiv,  'playlist-uptempo', 'playlist-downtempo' );
 
-if ( uptempo.includes(trackname)  )
-{
-mydiv.classList.add('playlist-uptempo');
-}
-else
-{
-  mydiv.classList.add('playlist-downtempo');
-}
+themeDiv(drums, trackname, mydiv,  'playlist-drums', 'playlist-nodrums' );
 
-if ( drums.includes(trackname)  )
-{
-mydiv.classList.add('playlist-drums');
-}
-else
-{
-  mydiv.classList.add('playlist-nodrums');
-}
+themeDiv(vocal, trackname, mydiv,  'playlist-vocal', 'playlist-instrumental' );
 
-if ( vocal.includes(trackname)  )
-{
-mydiv.classList.add('playlist-vocal');
-}
-else
-{
-  mydiv.classList.add('playlist-instrumental');
-}
 
  mydiv.classList.add('linkable');
 
