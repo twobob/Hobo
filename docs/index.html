@@ -205,7 +205,7 @@ if (autoplay) document.getElementById('main-video').play();
 
   $('.post-list-heading')[0].textContent = trimmedString(tidynameForVideo,45);
   document.getElementById('main-video').setAttribute('data-title',tidynameForVideo);
-  document.getElementById('playerTitle').innerHTML = 'TRK: '+randomIndex+' :'+ trimmedString(tidynameForVideo,35);
+  document.getElementById('playerTitle').innerHTML = 'TRK: '+(randomIndex+1)+' :'+ trimmedString(tidynameForVideo,35);
 
   // use the event object
   $('#main-video').bind('loadeddata', function(e) {
