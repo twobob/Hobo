@@ -15,8 +15,6 @@
 <meta property="og:site_name" content="Twobobs Hobo" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Twobobs Hobo" />
-<link id="ckincss" title="ckincss" href='https://twobob.github.io/Hobo/ckin/css/ckin.css' rel='stylesheet' />
-
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/aes.js"></script>
 <script type="text/javascript">
@@ -104,8 +102,6 @@ function addLink(link, linkText, selector){
 trackname = link.replace('https://twobob.github.io/Hobo/?tr=','');
 
  mydiv = document.createElement('div');
-
-themeDiv(dark, trackname, mydiv,  'playlist-dark' );
 
 themeDiv(edm, trackname, mydiv,  'playlist-edm' );
 
@@ -478,7 +474,7 @@ search2 = [
 {"@type":"WebSite","headline":"Twobobs Hobo","description":"DMCA free content for your feed","url":"https://twobob.github.io/Hobo","name":"Twobobs Hobo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-<!-- <script>
+<script>
      function CssOrScriptFallBack(el) {
          if (el instanceof HTMLScriptElement || el instanceof HTMLLinkElement) {
              let Url = el.getAttribute('data-fallback');
@@ -488,30 +484,20 @@ search2 = [
              }
          }
      }
- </script> -->
+ </script>
 
+ <link href='/Hobo/docs/assets/main.css' rel='stylesheet'
+       onerror='CssOrScriptFallBack(this)'
+       data-fallback='https://twobob.github.io/Hobo/assets/main.css' />
 
-<script>
-
-function weLoaded(){
-if (location.protocol == "file:")
-
-document.getElementById("maincss").href = '/Hobo/docs/assets/main.css';
-document.getElementById("ckincss").href = '/Hobo/docs/ckin/css/ckin.css';
-
-//  document.getElementsByTagName("link").item(2).href = '/Hobo/docs/assets/main.css';
-// document.getElementsByTagName("link").item(3).href = '/Hobo/docs/ckin/css/ckin.css';
-}
-
-
-</script>
-
-<link id="maincss" title="maincss"  href="https://twobob.github.io/Hobo/assets/main.css" rel="stylesheet" />
+       <link href='/Hobo/docs/ckin/css/ckin.css' rel='stylesheet'
+             onerror='CssOrScriptFallBack(this)'
+             data-fallback='https://twobob.github.io/Hobo/ckin/css/ckin.css' />
 
 
 <link type="application/atom+xml" rel="alternate" href="https://twobob.github.io/Hobo/feed.xml" title="Twobobs Hobo" />
 </head>
-<body onload="weLoaded"><header class="site-header" role="banner">
+<body><header class="site-header" role="banner">
 
   <div class="wrapper">
     <a class="site-title" rel="author" style="margin-right: 20px;" href="/Hobo/">Twobobs Hobo</a>
