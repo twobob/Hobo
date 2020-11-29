@@ -71,16 +71,68 @@ currentTrack = encodeURI(tracks[randomIndex]);
 changeVideo( true);
 }
 
+var drums = [       '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var vocal = [       '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var ambient = [     '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var uptempo = [     '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var edm = [         '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var collab = [      '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+var dark = [        '=bXA0L1N0cm9ua2VyLm1wNA=='];
+
+
 function addLink(link, linkText, selector){
 
- mydiv = document.createElement('div')
+ mydiv = document.createElement('div');
+
+ if ( edm.includes(link)  )
+ {
+ mydiv.classList.add('playlist-edm');
+ }
+
+
+if ( ambient.includes(link)  )
+{
+mydiv.classList.add('playlist-ambient');
+}
+
+if ( uptempo.includes(link)  )
+{
+mydiv.classList.add('playlist-uptempo');
+}
+else
+{
+  mydiv.classList.add('playlist-downtempo');
+}
+
+if ( drums.includes(link)  )
+{
+mydiv.classList.add('playlist-drums');
+}
+else
+{
+  mydiv.classList.add('playlist-nodrums');
+}
+
+if ( vocal.includes(link)  )
+{
+mydiv.classList.add('playlist-vocal');
+}
+else
+{
+  mydiv.classList.add('playlist-instrumental');
+}
 
  mydiv.classList.add('linkable');
 
  mydiv.style = "display: inline-block;";
 
  myimg= document.createElement('img');
-
 
 myimg.classList.add('splash');
 myimg.classList.add('splashWidth');
