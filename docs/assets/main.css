@@ -111,15 +111,15 @@ a {
 
 .linkable .state-excluded
 {
-display: none;
+display: none !important;
 }
 .linkable .state-included
 {
-display: block;
+display: inline-block;
 }
 .linkable .state-ignored
 {
-display: inherit;
+display: inline-block;
 }
 
 /**
