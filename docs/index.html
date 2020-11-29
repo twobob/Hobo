@@ -103,6 +103,8 @@ trackname = link.replace('https://twobob.github.io/Hobo/?tr=','');
 
  mydiv = document.createElement('div');
 
+themeDiv(dark, trackname, mydiv,  'playlist-dark' );
+
 themeDiv(edm, trackname, mydiv,  'playlist-edm' );
 
 themeDiv(ambient, trackname, mydiv,  'playlist-ambient' );
@@ -474,7 +476,7 @@ search2 = [
 {"@type":"WebSite","headline":"Twobobs Hobo","description":"DMCA free content for your feed","url":"https://twobob.github.io/Hobo","name":"Twobobs Hobo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-<script>
+<!-- <script>
      function CssOrScriptFallBack(el) {
          if (el instanceof HTMLScriptElement || el instanceof HTMLLinkElement) {
              let Url = el.getAttribute('data-fallback');
@@ -484,16 +486,17 @@ search2 = [
              }
          }
      }
- </script>
+ </script> -->
+<script>
+if (location.protocol == "file:")
 
- <link href='/Hobo/docs/assets/main.css' rel='stylesheet'
-       onerror='CssOrScriptFallBack(this)'
-       data-fallback='https://twobob.github.io/Hobo/assets/main.css' />
+document.getElementById('maincss').href = '/Hobo/docs/assets/main.css';
+document.getElementById('ckincss').href = '/Hobo/docs/ckin/css/ckin.css';
+</script>
 
-       <link href='/Hobo/docs/ckin/css/ckin.css' rel='stylesheet'
-             onerror='CssOrScriptFallBack(this)'
-             data-fallback='https://twobob.github.io/Hobo/ckin/css/ckin.css' />
+ <link on id='maincss' title="maincss"  href='https://twobob.github.io/Hobo/assets/main.css' rel='stylesheet' />
 
+  <link id="ckincss" title="ckincss" href='https://twobob.github.io/Hobo/ckin/css/ckin.css' rel='stylesheet' />
 
 <link type="application/atom+xml" rel="alternate" href="https://twobob.github.io/Hobo/feed.xml" title="Twobobs Hobo" />
 </head>
