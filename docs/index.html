@@ -487,20 +487,30 @@ search2 = [
          }
      }
  </script> -->
+
+
 <script>
+
+function weLoaded(){
 if (location.protocol == "file:")
 
-document.getElementById('maincss').href = '/Hobo/docs/assets/main.css';
-document.getElementById('ckincss').href = '/Hobo/docs/ckin/css/ckin.css';
+document.getElementById("maincss").href = '/Hobo/docs/assets/main.css';
+document.getElementById("ckincss").href = '/Hobo/docs/ckin/css/ckin.css';
+
+//  document.getElementsByTagName("link").item(2).href = '/Hobo/docs/assets/main.css';
+// document.getElementsByTagName("link").item(3).href = '/Hobo/docs/ckin/css/ckin.css';
+}
+
+
 </script>
 
- <link on id='maincss' title="maincss"  href='https://twobob.github.io/Hobo/assets/main.css' rel='stylesheet' />
+ <link id="maincss" title="maincss"  href="https://twobob.github.io/Hobo/assets/main.css" rel="stylesheet" />
 
   <link id="ckincss" title="ckincss" href='https://twobob.github.io/Hobo/ckin/css/ckin.css' rel='stylesheet' />
 
 <link type="application/atom+xml" rel="alternate" href="https://twobob.github.io/Hobo/feed.xml" title="Twobobs Hobo" />
 </head>
-<body><header class="site-header" role="banner">
+<body onload="weLoaded"><header class="site-header" role="banner">
 
   <div class="wrapper">
     <a class="site-title" rel="author" style="margin-right: 20px;" href="/Hobo/">Twobobs Hobo</a>
