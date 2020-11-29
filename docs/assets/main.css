@@ -129,7 +129,7 @@ display: none !important;
 }
 div.state-included
 {
-display: inline-block  !important;
+display: inline-block /*   !important; */ ;
 }
 div.state-ignored
 {
