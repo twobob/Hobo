@@ -196,17 +196,21 @@ for (n=0; n < res["tree"].length; n++){
   if (current.includes('.mp4')){
 
 // uncomment to elide the short Twitter clips
-//    if(! current.includes('twitter')
-//    {
+    if(! current.includes('twitter'))
+    {
     tracks.push(res["tree"][n]["path"]) ;
     search.push(res["tree"][n]["path"].replace('mp4/','').replace('.mp4','.mp3')) ;
-      // }
+       }
 
    }
   };
 
 // Shuffle now before we count and build links
-var shuffledtracks = shuffleArray( tracks );
+//var shuffledtracks = shuffleArray( tracks );
+
+
+var shuffledtracks =  tracks ;
+
 for (n=0; n < shuffledtracks.length; n++){
 addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(shuffledtracks[n]), shuffledtracks[n], 'list' );
    }
@@ -501,7 +505,7 @@ search2 = [
 
   <div class="wrapper">
     <a class="site-title" rel="author" style="margin-right: 20px;" href="/Hobo/">Twobobs Hobo</a>
-<h2  style="line-height: 54px;" class="post-list-heading">Content</h2>
+<h2  style="line-height: 54px; height: 50px; overflow: hidden; text-overflow: ellipsis;" class="post-list-heading">Content</h2>
     <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
