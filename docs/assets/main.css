@@ -109,8 +109,18 @@ a {
           }
 
 
-
-
+.linkable .state-excluded
+{
+display: none;
+}
+.linkable .state-included
+{
+display: block;
+}
+.linkable .state-ignored
+{
+display: inherit;
+}
 
 /**
  * Blockquotes
