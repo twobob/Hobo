@@ -107,17 +107,25 @@ a {
             color: seashell;
             background-size: 100%;
           }
+button.state-excluded{
+  color: red !important;
+}
+button.state-included{
+  color: green !important;
+}
+button.state-ignored{
+  color: white !important;
+}
 
-
-.linkable .state-excluded
+div.state-excluded
 {
 display: none !important;
 }
-.linkable .state-included
+div.state-included
 {
-display: inline-block;
+display: inline-block  !important;
 }
-.linkable .state-ignored
+div.state-ignored
 {
 display: inline-block;
 }
