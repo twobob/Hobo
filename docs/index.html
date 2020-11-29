@@ -55,7 +55,7 @@ function copyToClipboard(text) {
 }
 
 
-function runCopy(){  	copyToClipboard("  '"+tracks[randomIndex]+"',  "  );  }
+function runCopy(){  	copyToClipboard("  '"+playlist[randomIndex]+"',  "  );  }
 
 
 
@@ -87,6 +87,7 @@ function trimmedString(clip, maxlen)
 
 randomTrack = '';
 currentTrack = '';
+playlist=[];
 
 function returnSelectedTrack(){
   return currentTrack;
@@ -95,9 +96,9 @@ function returnSelectedTrack(){
 function PlayNextTrack(){
 
 randomIndex++;
-randomIndex = randomIndex%(tracks.length-1);
+randomIndex = randomIndex%(playlist.length);
 
-currentTrack = encodeURI(tracks[randomIndex]);
+currentTrack = encodeURI(playlist[randomIndex]);
 changeVideo( true);
 }
 
@@ -266,7 +267,10 @@ randomIndex = Math.floor(Math.random() *(0,tracks.length));
 }
 
 
-currentTrack = randomTrack = encodeURI(tracks[randomIndex]);
+// setup the playlist
+playlist = tracks;
+
+currentTrack = randomTrack = encodeURI(playlist[randomIndex]);
 
 changeVideo();
 
@@ -414,6 +418,13 @@ checkIfStateIsAbsolute();
  $('.playlist-'+selector).each(function (key , value) {    toggleState(value);
    });
 
+
+playlist = [];
+
+ $('.linkable:visible a').each(function (key , value) {
+
+   playlist[playlist.length] = base64_decode(value.href.replace('https://twobob.github.io/Hobo/?tr=',''));
+ });
 
 }
 
