@@ -109,12 +109,18 @@ a {
           }
 button.state-excluded{
   color: red !important;
+  background-color: rgba(200,0,0,.5); // Tint color
+  background-blend-mode: multiply;
 }
 button.state-included{
   color: green !important;
+  background-color: rgba(0,200,0,.5); // Tint color
+  background-blend-mode: multiply;
 }
 button.state-ignored{
   color: white !important;
+  background-color: white; // Tint color
+  background-blend-mode: multiply;
 }
 
 div.state-excluded
