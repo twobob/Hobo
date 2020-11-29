@@ -71,37 +71,39 @@ currentTrack = encodeURI(tracks[randomIndex]);
 changeVideo( true);
 }
 
-var drums = [       '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var drums = [       'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var vocal = [       '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var vocal = [       'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var ambient = [     '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var ambient = [     'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var uptempo = [     '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var uptempo = [     'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var edm = [         '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var edm = [         'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var collab = [      '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var collab = [      'bXA0L1N0cm9ua2VyLm1wNA=='];
 
-var dark = [        '=bXA0L1N0cm9ua2VyLm1wNA=='];
+var dark = [        'bXA0L1N0cm9ua2VyLm1wNA=='];
 
 
 function addLink(link, linkText, selector){
 
+trackname = link.replace('https://twobob.github.io/Hobo/?tr=')
+
  mydiv = document.createElement('div');
 
- if ( edm.includes(link)  )
+ if ( edm.includes(trackname)  )
  {
  mydiv.classList.add('playlist-edm');
  }
 
 
-if ( ambient.includes(link)  )
+if ( ambient.includes(trackname)  )
 {
 mydiv.classList.add('playlist-ambient');
 }
 
-if ( uptempo.includes(link)  )
+if ( uptempo.includes(trackname)  )
 {
 mydiv.classList.add('playlist-uptempo');
 }
@@ -110,7 +112,7 @@ else
   mydiv.classList.add('playlist-downtempo');
 }
 
-if ( drums.includes(link)  )
+if ( drums.includes(trackname)  )
 {
 mydiv.classList.add('playlist-drums');
 }
@@ -119,7 +121,7 @@ else
   mydiv.classList.add('playlist-nodrums');
 }
 
-if ( vocal.includes(link)  )
+if ( vocal.includes(trackname)  )
 {
 mydiv.classList.add('playlist-vocal');
 }
