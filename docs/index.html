@@ -98,7 +98,7 @@ function PlayNextTrack(){
 randomIndex++;
 randomIndex = randomIndex%(playlist.length);
 
-currentTrack = encodeURI(playlist[randomIndex]);
+
 changeVideo( true);
 }
 
@@ -152,6 +152,9 @@ themeDiv(drums, trackname, mydiv,  'playlist-drums', 'playlist-nodrums' );
 
 themeDiv(vocal, trackname, mydiv,  'playlist-vocal', 'playlist-instrumental' );
 
+themeDiv(collab, trackname, mydiv,  'playlist-collab' );
+
+themeDiv(dark, trackname, mydiv,  'playlist-dark' );
 
  mydiv.classList.add('linkable');
 
@@ -189,6 +192,19 @@ artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
 
  mylink.href = link;
 
+mylink.onclick = function(d) {
+    d.preventDefault();
+    d.stopPropagation();
+   // find this track in playlist.
+   // play it
+
+ randomIndex =  playlist.indexOf(base64_decode(this.search.replace('?tr=',''))) ;
+
+ changeVideo(true);
+
+
+  }
+
  mydiv.appendChild(mylink);
  mydiv.classList.add('state-ignored');
 
@@ -196,6 +212,8 @@ artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
  }
 
 function changeVideo(autoplay = false){
+
+  currentTrack = encodeURI(playlist[randomIndex]);
 
   document.getElementById('main-video').setAttribute('poster', "/Hobo/assets/player.png");
 
