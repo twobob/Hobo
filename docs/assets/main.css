@@ -101,12 +101,25 @@ a {
             /* float: left; */
             clear: none;
             float: left;
-            width: calc(100% / 7);
+            width: calc(100% / 7.5)  ;
             background-image: url('../art/ButtonBackground.png');
             border: 0;
             color: seashell;
             background-size: 100%;
           }
+
+          .view-button {
+          	clear: none;
+          	float: left;
+          	width: calc(100% / 20);
+          	background-image: url('../art/ButtonBackground.png');
+          	border: 0;
+          	color: seashell;
+          	background-size: 100%;
+          	margin-left: 10px;
+          }
+
+
 button.state-excluded{
   color: red !important;
   background-color: rgba(200,0,0,.5); // Tint color

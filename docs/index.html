@@ -467,13 +467,16 @@ else {
 }
 }
 
-
+function toggleView(){
+$('.slimview').toggle();
+$('.wideview').toggle();
+}
 
 </script>
 
 
   <fieldset>
-        <div class="radio-holder">
+        <div class="radio-holder slimview  ">
 
           <button class="radio-button" onclick="updateLayout(2)">2</button>
 
@@ -489,8 +492,34 @@ else {
 
           <button  class="radio-button" onclick="updateLayout(8)">8</button>
 
+    <button  class="view-button" onclick="toggleView()">[#]</button>
+
         </div>
+
+        <div class="radio-holder wideview" style="display: none" >
+
+          <button class="radio-button" onclick="updateLayout(4)">4</button>
+
+          <button  class="radio-button" onclick="updateLayout(6)">6</button>
+
+          <button  class="radio-button" onclick="updateLayout(8)">8</button>
+
+          <button  class="radio-button" onclick="updateLayout(10)">10</button>
+
+          <button  class="radio-button" onclick="updateLayout(12)">12</button>
+
+          <button  class="radio-button" onclick="updateLayout(14)">14</button>
+
+          <button  class="radio-button" onclick="updateLayout(16)">16</button>
+
+          <button  class="view-button" onclick="toggleView()">[#]</button>
+
+        </div>
+
+
       </fieldset>
+
+
 
 
       <fieldset id="filterButtons">
