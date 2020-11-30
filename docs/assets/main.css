@@ -123,14 +123,17 @@ button.state-ignored{
   background-blend-mode: multiply;
 }
 
+
+div.state-included
+{
+display: inline-block !important;  ;
+}
+
 div.state-excluded
 {
 display: none !important;
 }
-div.state-included
-{
-display: inline-block /*   !important; */ ;
-}
+
 div.state-ignored
 {
 display: inline-block;
