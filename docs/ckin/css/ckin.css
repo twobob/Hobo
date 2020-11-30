@@ -1,6 +1,6 @@
 /*!
    ckin v0.0.1: Custom HTML5 Video Player Skins.
-   (c) 2017 
+   (c) 2017
    MIT License
    git+https://github.com/hunzaboy/ckin.git
 */
@@ -124,6 +124,7 @@ video {
   overflow: hidden;
   border-radius: 5px;
   cursor: pointer;
+  background-color: bisque;
 }
 
 .default:before {
