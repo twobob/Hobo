@@ -265,10 +265,10 @@ for (n=0; n < res["tree"].length; n++){
   };
 
 // Shuffle now before we count and build links
-//var shuffledtracks = shuffleArray( tracks );
+var shuffledtracks = shuffleArray( tracks );
 
 
-var shuffledtracks =  tracks ;
+//var shuffledtracks =  tracks ;
 
 for (n=0; n < shuffledtracks.length; n++){
 addLink('https://twobob.github.io/Hobo/?tr='+base64_encode(shuffledtracks[n]), shuffledtracks[n], 'list' );
