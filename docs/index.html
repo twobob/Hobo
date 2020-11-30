@@ -458,6 +458,7 @@ if (el.classList.contains('state-ignored'))
 function checkIfStateIsAbsolute(){
 
 var result = true;
+var absolute = true;
 
 $('.playlist-chooser').each( function (index , el    ) {
 
@@ -465,15 +466,28 @@ $('.playlist-chooser').each( function (index , el    ) {
   {
      result = false;
   }
+
+  if( el.classList.contains('state-included') || el.classList.contains('state-excluded') )
+   {
+      absolute = false;
+   }
+
 });
 
 if (result)
+    {
+      $('.linkable').show();
+    }
+    else {
+        $('.linkable').hide();
+    }
+
+if (absolute)
 {
-  $('.linkable').show();
+$('.playlist-button').each( function( index, el){  el.title = "PLAYING ALL TRACKS";  }  )
+
 }
-else {
-    $('.linkable').hide();
-}
+
 }
 
 function toggleView(){
