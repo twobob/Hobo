@@ -190,6 +190,8 @@ artfile = linkText.substring(linkText.lastIndexOf('/')+1, linkText.length  );
  mylink.href = link;
 
  mydiv.appendChild(mylink);
+ mydiv.classList.add('state-ignored');
+
  document.getElementById(selector).appendChild(mydiv);
  }
 
@@ -362,29 +364,48 @@ function updateLayout(amount){
 }
 
 
-function elideClass(){
+function toggleState(el, selector){
 
-}
-
-function toggleState(el){
-
-  if ( !  el.classList.contains('state-ignored') && !el.classList.contains('state-included')  && !el.classList.contains('state-excluded')   )
-  el.classList.add('state-ignored');
-
+  // if ( !  el.classList.contains('state-ignored') && !el.classList.contains('state-included')  && !el.classList.contains('state-excluded')   )
+  // el.classList.add('state-ignored');
 
 if (el.classList.contains('state-ignored'))
 {
   el.classList.remove('state-ignored');
-  el.classList.add('state-included')
+  el.classList.add('state-included');
+
+  $('.playlist-'+selector).each(function (key , value) {
+   value.classList.remove('state-excluded');
+   value.classList.remove('state-ignored');
+   value.classList.add('state-included');
+    });
+
 }else if (el.classList.contains('state-included')) {
   el.classList.remove('state-included');
-  el.classList.add('state-excluded')
+  el.classList.add('state-excluded');
+  $('.playlist-'+selector).each(function (key , value) {
+   value.classList.remove('state-included');
+   value.classList.remove('state-ignored');
+   value.classList.add('state-excluded');
+    });
 }else if (el.classList.contains('state-excluded')) {
   el.classList.remove('state-excluded');
-  el.classList.add('state-ignored')
-}
+  el.classList.add('state-ignored');
+  $('.playlist-'+selector).each(function (key , value) {
+   value.classList.remove('state-included');
+   value.classList.remove('state-excluded');
+   value.classList.add('state-ignored');
+  });
+  }
 
+    checkIfStateIsAbsolute();
 
+    playlist = [];
+
+     $('.linkable:visible a').each(function (key , value) {
+
+       playlist[playlist.length] = base64_decode(value.href.replace('https://twobob.github.io/Hobo/?tr=',''));
+     });
 
 }
 
@@ -408,26 +429,6 @@ else {
     $('.linkable').hide();
 }
 }
-
-
-function sweepStates( selector)
-{
-
-checkIfStateIsAbsolute();
-
- $('.playlist-'+selector).each(function (key , value) {    toggleState(value);
-   });
-
-
-playlist = [];
-
- $('.linkable:visible a').each(function (key , value) {
-
-   playlist[playlist.length] = base64_decode(value.href.replace('https://twobob.github.io/Hobo/?tr=',''));
- });
-
-}
-
 
 
 
@@ -458,19 +459,19 @@ playlist = [];
       <fieldset id="filterButtons">
             <div class="radio-holder">
 
-              <button class="playlist-chooser radio-button state-ignored" onclick="toggleState(this); sweepStates('featured'); ">featured</button>
+              <button class="playlist-chooser radio-button state-ignored" onclick="toggleState(this, 'featured');  ">featured</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this); sweepStates('edm');">edm</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'edm');">edm</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this);sweepStates('poppy');">poppy</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'poppy');">poppy</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this);sweepStates('soundtrack');">soundtrack</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'soundtrack');">soundtrack</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this);sweepStates('uptempo');">uptempo</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'uptempo');">uptempo</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this);sweepStates('drums');">drums</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'drums');">drums</button>
 
-              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this);sweepStates('vocal');">vocal</button>
+              <button  class="playlist-chooser radio-button state-ignored" onclick="toggleState(this,'vocal');">vocal</button>
 
             </div>
           </fieldset>
