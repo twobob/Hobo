@@ -124,6 +124,8 @@ left: 0px;
             background-size: 100%;
             padding-left: 1px;
             margin-left: 0.55em;
+            height: 14px;
+            line-height: 0px;
           }
 
           .view-button {
