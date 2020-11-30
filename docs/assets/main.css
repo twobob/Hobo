@@ -143,16 +143,19 @@ left: 0px;
 
 button.state-excluded{
   color: red !important;
+  background: linear-gradient(rgba(249, 0, 0,.75), rgba(255, 0, 0,.85));
   background-color: rgba(200,0,0,.5); // Tint color
   background-blend-mode: multiply;
 }
 button.state-included{
   color: green !important;
+  background: linear-gradient(rgba(0, 255, 0,.75), rgba(0, 255, 0,.85));
   background-color: rgba(0,200,0,.5); // Tint color
   background-blend-mode: multiply;
 }
 button.state-ignored{
   color: white !important;
+  background: linear-gradient(rgba(255, 255, 255,0), rgba(255, 255, 255,0));
   background-color: white; // Tint color
   background-blend-mode: multiply;
 }
