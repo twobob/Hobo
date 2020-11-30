@@ -198,6 +198,8 @@ mylink.onclick = function(d) {
    // find this track in playlist.
    // play it
 
+window.history.replaceState( {} , window.title,  window.location.href.replace(window.location.search,'')+this.search );
+
  randomIndex =  playlist.indexOf(base64_decode(this.search.replace('?tr=',''))) ;
 
  changeVideo(true);
