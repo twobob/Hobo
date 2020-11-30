@@ -126,6 +126,7 @@ left: 0px;
             margin-left: 0.55em;
             height: 14px;
             line-height: 0px;
+            border-radius: 2px;
           }
 
           .view-button {
