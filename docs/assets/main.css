@@ -113,6 +113,17 @@ left: 0px;
             background-size: 100%;
           }
 
+          .playlist-button {
+            /* float: left; */
+            clear: none;
+            float: left;
+            width: calc(100% / 7.5)  ;
+            background-image: url('../art/ButtonBackground.png');
+            border: 0;
+            color: seashell;
+            background-size: 100%;
+          }
+
           .view-button {
           	clear: none;
           	float: left;
