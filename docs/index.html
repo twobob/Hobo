@@ -403,6 +403,8 @@ $('.playlist-chooser').each( function(ind, el){
    el.classList.remove('state-included');
    el.classList.remove('state-excluded');
    el.classList.add('state-ignored');
+
+   el.title = 'An IGNORED playlist';
 }
 
 });
@@ -414,6 +416,7 @@ if (el.classList.contains('state-ignored'))
 {
   el.classList.remove('state-ignored');
   el.classList.add('state-excluded');
+  el.title = 'playing EVERYTHING EXCLUDING things on this playlist';
 
   $('.playlist-'+selector).each(function (key , value) {
    value.classList.remove('state-included');
@@ -424,6 +427,7 @@ if (el.classList.contains('state-ignored'))
 }else if (el.classList.contains('state-included')) {
   el.classList.remove('state-included');
   el.classList.add('state-ignored');
+   el.title = 'An IGNORED playlist';
   $('.playlist-'+selector).each(function (key , value) {
    value.classList.remove('state-included');
    value.classList.remove('state-excluded');
@@ -432,6 +436,7 @@ if (el.classList.contains('state-ignored'))
 }else if (el.classList.contains('state-excluded')) {
   el.classList.remove('state-excluded');
   el.classList.add('state-included');
+  el.title = 'playing ONLY THINGS on this playlist';
   $('.playlist-'+selector).each(function (key , value) {
    value.classList.remove('state-ignored');
    value.classList.remove('state-excluded');
