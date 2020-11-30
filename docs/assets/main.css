@@ -124,7 +124,9 @@ left: 0px;
           	margin-left: 10px;
             padding-left: 0px;
           }
-
+.view-button.view-button-slim{
+   padding-left: 3px;
+}
 
 button.state-excluded{
   color: red !important;

@@ -475,6 +475,8 @@ function toggleView(){
 $('.slimview').toggle();
 $('.wideview').toggle();
 $('#list').toggleClass('widelist' );
+$('.view-button').toggleClass('view-button-slim' );
+$('.site-footer').toggle();
  if ($('#list').hasClass('widelist' )){
    if (CurrentTileRowCount < 4) {
      updateLayout(4);
