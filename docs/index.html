@@ -105,6 +105,7 @@ changeVideo( true);
 function PlayPrevTrack(){
 
 randomIndex--;
+randomIndex = randomIndex%(playlist.length);
 if (randomIndex < 0) randomIndex = playlist.length -1;
 
 changeVideo( true);
