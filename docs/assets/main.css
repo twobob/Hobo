@@ -156,7 +156,7 @@ button.state-included{
 }
 button.state-ignored{
   color: white !important;
-  background: linear-gradient(rgba(255, 255, 255,0.1), rgba(255, 255, 255,0.05)),  url('../art/ButtonBackground.png');
+  background: url('../art/ButtonBackground.png');
 
 }
 
