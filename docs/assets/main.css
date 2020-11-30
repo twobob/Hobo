@@ -97,6 +97,11 @@ a {
             border: 1px dotted #333;
           }
 
+.widelist{
+  position: absolute;
+left: 0px;
+}
+
           .radio-button {
             /* float: left; */
             clear: none;
