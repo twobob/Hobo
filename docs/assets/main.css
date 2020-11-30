@@ -123,6 +123,10 @@ button.state-ignored{
   background-blend-mode: multiply;
 }
 
+.ckin__player {
+
+	min-height: 414px;
+}
 
 div.state-included
 {
