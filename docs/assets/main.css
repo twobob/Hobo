@@ -117,11 +117,13 @@ left: 0px;
             /* float: left; */
             clear: none;
             float: left;
-            width: calc(100% / 7.5)  ;
+            width: calc(100% / 10)  ;
             background-image: url('../art/ButtonBackground.png');
             border: 0;
             color: seashell;
             background-size: 100%;
+            padding-left: 1px;
+            margin-left: 0.55em;
           }
 
           .view-button {
