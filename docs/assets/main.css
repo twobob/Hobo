@@ -408,6 +408,19 @@ table {
 
   .default__title2 {
   	position: absolute;
+  	right: 80px;
+  	top: 20px;
+  	z-index: 1;
+  	font-size: 24px;
+  	color: rgba(255, 255, 255, 0.8);
+  	background-color: #80808052;
+  	border-radius: 5px;
+  	padding-left: 10px;
+  	padding-right: 10px;
+  }
+
+  .default__title3 {
+  	position: absolute;
   	right: 20px;
   	top: 20px;
   	z-index: 1;
