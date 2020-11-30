@@ -379,8 +379,12 @@ document.getElementById('main-video').onended = function(e) {
   data-overlay="1" data-title=""></video>
 
 <script type="text/javascript">
+
+var CurrentTileRowCount =2;
+
 function updateLayout(amount){
   $('.linkable').each( function(ind, el){ el.style.maxWidth = (100 / amount)+'%'});
+  CurrentTileRowCount = amount;
 }
 
 
@@ -471,6 +475,17 @@ function toggleView(){
 $('.slimview').toggle();
 $('.wideview').toggle();
 $('#list').toggleClass('widelist' );
+ if ($('#list').hasClass('widelist' )){
+   if (CurrentTileRowCount < 4) {
+     updateLayout(4);
+   }
+  }
+  if (!$('#list').hasClass('widelist' )){
+    if (CurrentTileRowCount > 8) {
+      updateLayout(8);
+    }
+   }
+
 }
 
 </script>
@@ -493,7 +508,7 @@ $('#list').toggleClass('widelist' );
 
           <button  class="radio-button" onclick="updateLayout(8)">8</button>
 
-    <button  class="view-button" onclick="toggleView()">[#]</button>
+    <button  class="view-button" onclick="toggleView()" title="TOGGLE WIDE/SLIM VIEW">WIDE</button>
 
         </div>
 
@@ -513,7 +528,7 @@ $('#list').toggleClass('widelist' );
 
           <button  class="radio-button" onclick="updateLayout(16)">16</button>
 
-          <button  class="view-button" onclick="toggleView()">[#]</button>
+          <button  class="view-button" onclick="toggleView()" title="TOGGLE WIDE/SLIM VIEW"  >SLIM</button>
 
         </div>
 
