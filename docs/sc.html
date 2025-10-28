@@ -763,6 +763,7 @@
           Amplitude.init({
             bindings: { 37: 'prev', 39: 'next', 32: 'play_pause' },
             debug: true,
+            shuffle_on: true,
             visualization: 'michaelbromley_visualization',
             songs: songs,
             waveforms: { sample_rate: 50 },
@@ -801,7 +802,7 @@
           
           if (volumeSlider && volumePercentage) {
             // Wait for Amplitude to initialize, then set initial volume display
-            setTimeout(() => {
+            setTimeout(() => {              
               const currentVolume = Amplitude.getVolume();
               volumePercentage.textContent = Math.round(currentVolume) + '%';
               volumeSlider.value = currentVolume;
