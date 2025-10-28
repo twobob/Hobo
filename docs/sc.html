@@ -7,597 +7,733 @@
     <script type="text/javascript" src="https://amplitude-cdn.serversideup.net/visualizations/michaelbromley.js"></script>
 
     <style>
-      html, body {
-        background-color: #333;
-        font-family: "Lato", sans-serif;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      /* Responsive wrapper */
-      #player-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background: #333;
-      }
-
-      /* Base player container */
-      #visualizations-player {
-        width: 90vw;
-        max-width: 500px;
-        background-color: #482D57;
-        border-radius: 20px;
-        padding: 20px;
-        overflow: visible;
-        position: relative;
-        transition: width 0.25s ease, height 0.25s ease;
-        box-sizing: border-box;
-      }
-
-      @media (max-width: 600px) {
-        #visualizations-player {
-          width: 95vw;
-          padding: 15px;
-        }
-      }
-
-      /* === Base component styling === */
-      div#pre-load-img-container {
-        display: none;
-      }
-
-      div.top-container {
-        margin-bottom: 30px;
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      div.top-container div.amplitude-visualization {
-        width: 180px;
-        height: 180px;
-        max-width: 90%;
-        max-height: 180px;
-        box-shadow: 0 5px 31px 0 rgba(0, 0, 0, 0.5);
-        margin: auto;
-        background-color: black;
-      }
-
-      div.top-container img.now-playing-album-art {
-        width: 180px;
-        max-width: 90%;
-        margin: auto;
-        box-shadow: 0 5px 31px 0 rgba(0, 0, 0, 0.5);
-        display: none;
-      }
-
-      div.top-container div.visualization-toggle {
-        width: 24px;
-        height: 24px;
-        top: 0;
-        right: 8px;
-        cursor: pointer;
-        position: absolute;
-      }
-
-      div.top-container div.visualization-toggle.visualization-on {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/visualization-on.svg") no-repeat center;
-      }
-
-      div.top-container div.visualization-toggle.visualization-off {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/visualization-off.svg") no-repeat center;
-      }
-
-      div.top-container div.amplitude-shuffle {
-        width: 22px;
-        height: 13px;
-        cursor: pointer;
-        top: 48px;
-        right: 10px;
-        position: absolute;
-      }
-
-      div.top-container div.amplitude-shuffle.amplitude-shuffle-on {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-on.svg") no-repeat center;
-      }
-
-      div.top-container div.amplitude-shuffle.amplitude-shuffle-off {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-off.svg") no-repeat center;
-      }
-
-      div.top-container div.amplitude-repeat {
-        width: 25px;
-        height: 15px;
-        cursor: pointer;
-        top: 85px;
-        right: 8px;
-        position: absolute;
-      }
-
-      div.top-container div.amplitude-repeat.amplitude-repeat-on {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-on.svg") no-repeat center;
-      }
-
-      div.top-container div.amplitude-repeat.amplitude-repeat-off {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-off.svg") no-repeat center;
-      }
-
-      div.control-container {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
-      }
-
-      div.control-container div.amplitude-prev {
-        width: 18px;
-        height: 24px;
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/prev.svg");
-        background-size: cover;
-        cursor: pointer;
-        flex-shrink: 0;
-      }
-
-      div.control-container div.amplitude-play-pause {
-        width: 30px;
-        height: 44px;
-        cursor: pointer;
-        flex-shrink: 0;
-      }
-
-      div.control-container div.amplitude-play-pause.amplitude-playing {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/pause.svg") no-repeat center;
-      }
-
-      div.control-container div.amplitude-play-pause.amplitude-paused {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/play.svg") no-repeat center;
-      }
-
-      div.control-container div.amplitude-next {
-        width: 18px;
-        height: 24px;
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/next.svg");
-        background-size: cover;
-        cursor: pointer;
-        flex-shrink: 0;
-      }
-
-      div.meta-data-container {
-        margin-top: 30px;
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-      }
-
-      div.meta-data-container span.now-playing-name {
-        display: block;
-        text-align: center;
-        margin-bottom: 10px;
-        font-size: 22px;
-        font-weight: 700;
-        color: white;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        line-height: 1.3;
-        padding: 0 5px;
-      }
-
-      div.meta-data-container span.now-playing-artist-album {
-        display: block;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-        padding: 0 5px;
-      }
-
-      div.amplitude-wave-form {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-      }
-
-      div.amplitude-wave-form svg {
-        stroke: url(#gradient);
-        height: 50px;
-        width: 100%;
-        stroke-width: 0.5px;
-      }
-
-      span.amplitude-current-time {
-        display: block;
-        text-align: left;
-        color: white;
-        font-size: 11px;
-        padding: 0 10px;
-      }
-
-      span.amplitude-time-remaining {
-        display: block;
-        text-align: right;
-        color: white;
-        font-size: 11px;
-        padding: 0 10px;
-      }
-
-      div.song-navigation {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-        margin-top: 15px;
-      }
-
-      div.song-navigation input[type="range"] {
-        width: 100%;
-        -webkit-appearance: none;
-        background-color: inherit;
-      }
-
-      div.arrow-up {
-        width: 100%;
-        text-align: center;
-        margin-top: 15px;
-        margin-bottom: 10px;
-      }
-
-      div.arrow-up img.arrow-up-icon {
-        cursor: pointer;
-        display: inline-block;
-      }
-
-      /* Volume control styles */
-      div.volume-container {
-        margin-top: 15px;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        padding: 0 15px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      div.volume-icon {
-        width: 20px;
-        height: 20px;
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/volume.svg") no-repeat center;
-        background-size: contain;
-        opacity: 0.7;
-        flex-shrink: 0;
-      }
-
-      input[type="range"].amplitude-volume-slider {
-        flex: 1;
-        max-width: 70%;
-        -webkit-appearance: none;
-        background-color: inherit;
-        height: 4px;
-      }
-
-      input[type="range"].amplitude-volume-slider:focus {
-        outline: none;
-      }
-
-      input[type="range"].amplitude-volume-slider::-webkit-slider-runnable-track {
-        width: 100%;
-        height: 4px;
-        cursor: pointer;
-        border-radius: 2px;
-        background: rgba(255, 255, 255, 0.25);
-      }
-
-      input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
-        width: 14px;
-        height: 14px;
-        background-color: white;
-        border-radius: 50%;
-        -webkit-appearance: none;
-        margin-top: -5px;
-        cursor: pointer;
-      }
-
-      input[type="range"].amplitude-volume-slider::-moz-range-track {
-        width: 100%;
-        height: 4px;
-        cursor: pointer;
-        border-radius: 2px;
-        background: rgba(255, 255, 255, 0.25);
-      }
-
-      input[type="range"].amplitude-volume-slider::-moz-range-thumb {
-        width: 14px;
-        height: 14px;
-        background-color: white;
-        border-radius: 50%;
-        cursor: pointer;
-        border: none;
-      }
-
-      .volume-percentage {
-        color: white;
-        font-size: 12px;
-        min-width: 38px;
-        text-align: right;
-        flex-shrink: 0;
-      }
-
-      input[type="range"]#global-large-song-slider {
-        width: 100%;
-        margin-top: -74px;
-        -webkit-appearance: none;
-        z-index: 9999;
-        background-color: inherit;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-      }
-        width: 100%;
-        margin-top: -74px;
-        -webkit-appearance: none;
-        z-index: 9999;
-        background-color: inherit;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-      }
-
-      input[type="range"]#global-large-song-slider::-webkit-slider-thumb {
-        width: 5px;
-        height: 68px;
-        background-color: white;
-        border-radius: 20px;
-        -webkit-appearance: none;
-      }
-
-      /* Playlist overlay styles */
-      div#visualizations-player-playlist {
-        background-color: #482D57;
-        border-radius: 20px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        padding: 25px;
-        padding-top: 25px;
-        z-index: 9999;
-        display: none;
-      }
-
-      div#visualizations-player-playlist div.top-arrow {
-        text-align: center;
-      }
-
-      div#visualizations-player-playlist div.top-arrow img {
-        cursor: pointer;
-      }
-
-      div#visualizations-player-playlist div.top {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      div#visualizations-player-playlist div.top span.playlist-title {
-        color: white;
-        font-size: 36px;
-        font-weight: 700;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-shuffle {
-        width: 22px;
-        height: 13px;
-        cursor: pointer;
-        float: right;
-        margin-top: 22px;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-shuffle.amplitude-shuffle-on {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-on.svg") no-repeat center;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-shuffle.amplitude-shuffle-off {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-off.svg") no-repeat center;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-repeat {
-        width: 25px;
-        height: 15px;
-        cursor: pointer;
-        float: right;
-        margin-left: 25px;
-        margin-top: 20px;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-repeat.amplitude-repeat-on {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-on.svg") no-repeat center;
-      }
-
-      div#visualizations-player-playlist div.top div.amplitude-repeat.amplitude-repeat-off {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-off.svg") no-repeat center;
-      }
-
-      div#visualizations-player-playlist div.songs-container {
-        padding-top: 35px;
-        height: 400px;
-        padding-bottom: 90px;
-        overflow-y: scroll;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song {
-        margin-bottom: 20px;
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 3px;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song.amplitude-active-song-container {
-        background-color: #03C1EB;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song:hover {
-        background-color: #4CF298;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song span.song-position {
-        color: white;
-        font-size: 18px;
-        float: left;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song img.song-album-art {
-        width: 44px;
-        height: 44px;
-        border-radius: 4px;
-        box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
-        float: left;
-        margin-left: 12px;
-        margin-right: 16px;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container {
-        float: left;
-        width: calc(100% - 105px);
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container span.song-name {
-        font-size: 18px;
-        display: block;
-        color: white;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container span.song-artist {
-        font-size: 12px;
-        display: block;
-        color: white;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      div#visualizations-player-playlist div.songs-container div.song:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      div#visualizations-player-playlist div.active-audio {
-        background-color: rgba(3, 193, 235, 0.7);
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 40px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 25px;
-        padding-right: 25px;
-        display: flex;
-      }
-
-      div#visualizations-player-playlist div.active-audio img.cover-art-small {
-        width: 50px;
-        height: 50px;
-        border-radius: 4px;
-        float: left;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right {
-        float: left;
-        width: calc(100% - 50px);
-        padding-left: 10px;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right span.song-name {
-        font-size: 16px;
-        color: white;
-        display: block;
-        text-align: center;
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls {
-        text-align: center;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-prev {
-        width: 18px;
-        height: 26px;
-        display: inline-block;
-        background-size: contain;
-        background: url(https://amplitude-cdn.serversideup.net/img/examples/visualizations/prev.svg) no-repeat center;
-        margin-right: 20px;
-        vertical-align: middle;
-        cursor: pointer;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause {
-        display: inline-block;
-        width: 24px;
-        height: 25px;
-        cursor: pointer;
-        margin: auto;
-        vertical-align: middle;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause.amplitude-paused {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/small-play.svg") no-repeat center;
-        background-size: contain;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause.amplitude-playing {
-        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/small-pause.svg") no-repeat center;
-        background-size: contain;
-      }
-
-      div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-next {
-        width: 18px;
-        height: 26px;
-        display: inline-block;
-        background-size: contain;
-        background: url(https://amplitude-cdn.serversideup.net/img/examples/visualizations/next.svg) no-repeat center;
-        margin-left: 20px;
-        vertical-align: middle;
-        cursor: pointer;
-      }
-
-      a.learn-more {
-        display: block;
-        color: white;
-        text-align: center;
-        width: 300px;
-        border-radius: 5px;
-        text-decoration: none;
-        padding: 10px;
-        margin: auto;
-        margin-top: 20px;
-        background-color: #482D57;
-      }
+html, body {
+  background-color: #333;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Responsive wrapper */
+#player-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #333;
+}
+
+/* Base player container */
+#visualizations-player {
+  width: 90vw;
+  max-width: 500px;
+  background-color: #482D57;
+  border-radius: 20px;
+  padding: 20px;
+  overflow: visible;
+  position: relative;
+  transition: width 0.25s ease, height 0.25s ease;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  #visualizations-player {
+    width: 95vw;
+    padding: 15px;
+  }
+}
+
+/* === Base component styling === */
+div#pre-load-img-container {
+  display: none;
+}
+
+div.top-container {
+  margin-bottom: 30px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.top-container div.amplitude-visualization {
+  width: 180px;
+  height: 180px;
+  max-width: 90%;
+  max-height: 180px;
+  box-shadow: 0 5px 31px 0 rgba(0, 0, 0, 0.5);
+  margin: auto;
+  background-color: black;
+}
+
+div.top-container img.now-playing-album-art {
+  width: 180px;
+  max-width: 90%;
+  margin: auto;
+  box-shadow: 0 5px 31px 0 rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+div.top-container div.visualization-toggle {
+  width: 50px;
+  height: 50px;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+div.top-container div.visualization-toggle:active {
+  transform: scale(0.9);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+div.top-container div.visualization-toggle.visualization-on::before {
+  content: '';
+  width: 50%;
+  height: 50%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/visualization-on.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.top-container div.visualization-toggle.visualization-off::before {
+  content: '';
+  width: 50%;
+  height: 50%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/visualization-off.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.top-container div.amplitude-shuffle {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  top: 62px;
+  right: 5px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+div.top-container div.amplitude-shuffle:active {
+  transform: scale(0.9);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+div.top-container div.amplitude-shuffle.amplitude-shuffle-on {
+  background-color: rgba(76, 242, 152, 0.3);
+}
+
+div.top-container div.amplitude-shuffle.amplitude-shuffle-on::before,
+div.top-container div.amplitude-shuffle.amplitude-shuffle-off::before {
+  content: '';
+  width: 50%;
+  height: 50%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-on.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.top-container div.amplitude-repeat {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  top: 119px;
+  right: 5px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+div.top-container div.amplitude-repeat:active {
+  transform: scale(0.9);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+div.top-container div.amplitude-repeat.amplitude-repeat-on {
+  background-color: rgba(76, 242, 152, 0.3);
+}
+
+div.top-container div.amplitude-repeat.amplitude-repeat-on::before,
+div.top-container div.amplitude-repeat.amplitude-repeat-off::before {
+  content: '';
+  width: 50%;
+  height: 50%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-on.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.control-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3%;
+  width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
+}
+
+div.control-container div.amplitude-prev {
+  width: 22%;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+div.control-container div.amplitude-prev:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+div.control-container div.amplitude-prev::before {
+  content: '';
+  width: 35%;
+  height: 35%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/prev.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.control-container div.amplitude-play-pause {
+  width: 28%;
+  height: 80px;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+div.control-container div.amplitude-play-pause:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+div.control-container div.amplitude-play-pause.amplitude-playing::before {
+  content: '';
+  width: 40%;
+  height: 40%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/pause.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.control-container div.amplitude-play-pause.amplitude-paused::before {
+  content: '';
+  width: 40%;
+  height: 40%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/play.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.control-container div.amplitude-next {
+  width: 22%;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+div.control-container div.amplitude-next:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+div.control-container div.amplitude-next::before {
+  content: '';
+  width: 35%;
+  height: 35%;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/next.svg") no-repeat center;
+  background-size: contain;
+}
+
+div.meta-data-container {
+  margin-top: 30px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+div.meta-data-container span.now-playing-name {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.3;
+  padding: 0 5px;
+}
+
+div.meta-data-container span.now-playing-artist-album {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 5px;
+}
+
+div.amplitude-wave-form {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+div.amplitude-wave-form svg {
+  stroke: url(#gradient);
+  height: 50px;
+  width: 100%;
+  stroke-width: 0.5px;
+}
+
+span.amplitude-current-time {
+  display: block;
+  text-align: left;
+  color: white;
+  font-size: 11px;
+  padding: 0 10px;
+}
+
+span.amplitude-time-remaining {
+  display: block;
+  text-align: right;
+  color: white;
+  font-size: 11px;
+  padding: 0 10px;
+}
+
+div.song-navigation {
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin-top: 15px;
+}
+
+div.song-navigation input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  background-color: inherit;
+}
+
+div.arrow-up {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+div.arrow-up img.arrow-up-icon {
+  cursor: pointer;
+  display: inline-block;
+  width: 60px;
+  height: 40px;
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+div.arrow-up img.arrow-up-icon:active {
+  transform: scale(0.95);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Volume control styles */
+div.volume-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+}
+
+div.volume-icon {
+  width: 24px;
+  height: 24px;
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/volume.svg") no-repeat center;
+  background-size: contain;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+input[type="range"].amplitude-volume-slider {
+  flex: 1;
+  max-width: 65%;
+  -webkit-appearance: none;
+  background-color: inherit;
+  height: 8px;
+}
+
+input[type="range"].amplitude-volume-slider:focus {
+  outline: none;
+}
+
+input[type="range"].amplitude-volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  margin-top: -8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+input[type="range"].amplitude-volume-slider::-webkit-slider-thumb:active {
+  transform: scale(1.1);
+}
+
+input[type="range"].amplitude-volume-slider::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.volume-percentage {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 42px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+input[type="range"]#global-large-song-slider {
+  width: 100%;
+  margin-top: -74px;
+  -webkit-appearance: none;
+  z-index: 9999;
+  background-color: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+input[type="range"]#global-large-song-slider::-webkit-slider-thumb {
+  width: 5px;
+  height: 68px;
+  background-color: white;
+  border-radius: 20px;
+  -webkit-appearance: none;
+}
+
+/* Playlist overlay styles */
+div#visualizations-player-playlist {
+  background-color: #482D57;
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 25px;
+  padding-top: 25px;
+  z-index: 9999;
+  display: none;
+}
+
+div#visualizations-player-playlist div.top-arrow {
+  text-align: center;
+}
+
+div#visualizations-player-playlist div.top-arrow img {
+  cursor: pointer;
+}
+
+div#visualizations-player-playlist div.top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+div#visualizations-player-playlist div.top span.playlist-title {
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-shuffle {
+  width: 22px;
+  height: 13px;
+  cursor: pointer;
+  float: right;
+  margin-top: 22px;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-shuffle.amplitude-shuffle-on {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-on.svg") no-repeat center;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-shuffle.amplitude-shuffle-off {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/shuffle-off.svg") no-repeat center;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-repeat {
+  width: 25px;
+  height: 15px;
+  cursor: pointer;
+  float: right;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-repeat.amplitude-repeat-on {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-on.svg") no-repeat center;
+}
+
+div#visualizations-player-playlist div.top div.amplitude-repeat.amplitude-repeat-off {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/repeat-off.svg") no-repeat center;
+}
+
+div#visualizations-player-playlist div.songs-container {
+  padding-top: 35px;
+  height: 400px;
+  padding-bottom: 90px;
+  overflow-y: scroll;
+}
+
+div#visualizations-player-playlist div.songs-container div.song {
+  margin-bottom: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+div#visualizations-player-playlist div.songs-container div.song.amplitude-active-song-container {
+  background-color: #03C1EB;
+}
+
+div#visualizations-player-playlist div.songs-container div.song:hover {
+  background-color: #4CF298;
+}
+
+div#visualizations-player-playlist div.songs-container div.song span.song-position {
+  color: white;
+  font-size: 18px;
+  float: left;
+}
+
+div#visualizations-player-playlist div.songs-container div.song img.song-album-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.5);
+  float: left;
+  margin-left: 12px;
+  margin-right: 16px;
+}
+
+div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container {
+  float: left;
+  width: calc(100% - 105px);
+}
+
+div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container span.song-name {
+  font-size: 18px;
+  display: block;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#visualizations-player-playlist div.songs-container div.song div.song-meta-data-container span.song-artist {
+  font-size: 12px;
+  display: block;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#visualizations-player-playlist div.songs-container div.song:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div#visualizations-player-playlist div.active-audio {
+  background-color: rgba(3, 193, 235, 0.7);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+}
+
+div#visualizations-player-playlist div.active-audio img.cover-art-small {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  float: left;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right {
+  float: left;
+  width: calc(100% - 50px);
+  padding-left: 10px;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right span.song-name {
+  font-size: 16px;
+  color: white;
+  display: block;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls {
+  text-align: center;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-prev {
+  width: 18px;
+  height: 26px;
+  display: inline-block;
+  background-size: contain;
+  background: url(https://amplitude-cdn.serversideup.net/img/examples/visualizations/prev.svg) no-repeat center;
+  margin-right: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause {
+  display: inline-block;
+  width: 24px;
+  height: 25px;
+  cursor: pointer;
+  margin: auto;
+  vertical-align: middle;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause.amplitude-paused {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/small-play.svg") no-repeat center;
+  background-size: contain;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-play-pause.amplitude-playing {
+  background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/small-pause.svg") no-repeat center;
+  background-size: contain;
+}
+
+div#visualizations-player-playlist div.active-audio div.active-audio-right div.active-audio-controls div.amplitude-next {
+  width: 18px;
+  height: 26px;
+  display: inline-block;
+  background-size: contain;
+  background: url(https://amplitude-cdn.serversideup.net/img/examples/visualizations/next.svg) no-repeat center;
+  margin-left: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+a.learn-more {
+  display: block;
+  color: white;
+  text-align: center;
+  width: 300px;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #482D57;
+}
     </style>
   </head>
 
