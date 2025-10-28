@@ -32,21 +32,12 @@
       #visualizations-player {
         width: 90vw;
         max-width: 500px;
-        aspect-ratio: 1 / 1.5;
         background-color: #482D57;
         border-radius: 20px;
         padding: 25px;
         overflow: hidden;
         position: relative;
         transition: width 0.25s ease, height 0.25s ease;
-      }
-
-      @supports not (aspect-ratio: 1) {
-        #visualizations-player::before {
-          content: "";
-          float: left;
-          padding-top: 150%;
-        }
       }
 
       @media (max-width: 600px) {
@@ -231,7 +222,8 @@
 
       /* Volume control styles */
       div.volume-container {
-        margin-top: 20px;
+        margin-top: 25px;
+        margin-bottom: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -577,14 +569,14 @@
           <div class="amplitude-next"></div>
         </div>
 
+        <div class="song-navigation">
+          <input type="range" class="amplitude-song-slider"/>
+        </div>
+
         <div class="volume-container">
           <div class="volume-icon"></div>
           <input type="range" class="amplitude-volume-slider" step="1"/>
           <span class="volume-percentage" style="color: white; font-size: 12px; min-width: 35px; text-align: right;">100%</span>
-        </div>
-
-        <div class="song-navigation">
-          <input type="range" class="amplitude-song-slider"/>
         </div>
 
         <div class="arrow-up">
@@ -757,23 +749,44 @@
 
         // Responsive scaling logic
         const player = document.getElementById('visualizations-player');
+        const baseWidth = 325;
+        const baseHeight = 487.5; // 1.5 ratio
         const baseRatio = 1.5;
+        
         function resizePlayer() {
-          const maxWidth = window.innerWidth * 0.95;
-          const proposedHeight = maxWidth * baseRatio;
+          const maxWidth = Math.min(window.innerWidth * 0.95, 500);
           const maxHeight = window.innerHeight * 0.95;
-
-          if (proposedHeight > maxHeight) {
-            const height = maxHeight;
-            const width = height / baseRatio;
-            player.style.width = width + "px";
-            player.style.height = height + "px";
+          
+          let width, height;
+          
+          // Calculate dimensions while maintaining aspect ratio
+          if (maxWidth * baseRatio > maxHeight) {
+            // Height constrained
+            height = maxHeight;
+            width = height / baseRatio;
           } else {
-            const width = maxWidth;
-            const height = width * baseRatio;
-            player.style.width = width + "px";
-            player.style.height = height + "px";
+            // Width constrained
+            width = maxWidth;
+            height = width * baseRatio;
           }
+          
+          player.style.width = width + "px";
+          player.style.height = height + "px";
+          
+          // Calculate scale factor (minimum of width or height scale, always >= 1)
+          const widthScale = width / baseWidth;
+          const heightScale = height / baseHeight;
+          const scale = Math.max(1, Math.min(widthScale, heightScale));
+          
+          // Apply scaling to controls and text
+          player.style.setProperty('--scale-factor', scale);
+          
+          // Scale specific elements
+          const scalableElements = player.querySelectorAll('.top-container, .control-container, .meta-data-container, .amplitude-wave-form, .volume-container, .arrow-up, div.song-navigation');
+          scalableElements.forEach(el => {
+            el.style.transform = `scale(${scale})`;
+            el.style.transformOrigin = 'center';
+          });
         }
 
         window.addEventListener('resize', resizePlayer);
