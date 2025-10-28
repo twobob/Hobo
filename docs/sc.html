@@ -1,25 +1,17 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AmplitudeJS Single Song Example</title>
-
-    <!-- Include font -->
+    <title>AmplitudeJS Dynamic Song List</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i" rel="stylesheet">
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
-
-
-    <!-- Include Amplitude JS Visualizations -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
     <script type="text/javascript" src="https://amplitude-cdn.serversideup.net/visualizations/michaelbromley.js"></script>
-
-		<!-- Include Style Sheet -->
     <style>
+
+
       /*
   1. Base
 */
-html, body {
-  background-color: #333;
-font-family: "Lato", sans-serif;}
+html, body { background-color: #333; font-family: "Lato", sans-serif; }
 
 div#pre-load-img-container {
   display: none; }
@@ -677,79 +669,105 @@ a.learn-more{
       </div>
     </div>
 
-    <div id="pre-load-img-container">
+	  
+	  
+    <div id="pre-load-img-container" style="display:none">
       <img src="https://amplitude-cdn.serversideup.net/img/examples/visualizations/play.svg"/>
       <img src="https://amplitude-cdn.serversideup.net/img/examples/visualizations/pause.svg"/>
       <img src="https://amplitude-cdn.serversideup.net/img/examples/visualizations/next.svg"/>
       <img src="https://amplitude-cdn.serversideup.net/img/examples/visualizations/prev.svg"/>
     </div>
-    <a class="learn-more" href="https://serversideup.net/courses/amplitudejs-from-the-ground-up/">Learn More on Server Side Up</a>
-    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#03C1EB" />
-          <stop offset="100%" stop-color="#86F3B8" />
-        </linearGradient>
-      </defs>
-    </svg>
-	        
-        <script type="text/javascript">
-Amplitude.init({
-	bindings: {
-	  37: 'prev',
-	  39: 'next',
-	  32: 'play_pause'
-	},
-	debug: true,
-	visualization: 'michaelbromley_visualization',
-	songs: [
-	  {
-		"name": "Experimental",
-		"artist": "twobob",
-		"album": "Ask The twobob",
-		"url": "https://github.com/twobob/Hobo/blob/main/soundcloud/'Mind%20Heart%20Body'%20%20Feat.%20Daria%20Black%20(Club%20Mix)%20%20%20%20Preview%20Version.mp3?raw=true",
-		"cover_art_url": "https://github.com/twobob/Hobo/blob/main/docs/art/1980%20and%20a%20half.jpg",
-		"visualization": "michaelbromley_visualization"
-	  }
-	],
-  
-	waveforms: {
-		sample_rate: 50
-	},
-  
-	visualizations: [
-	  {
-		object: MichaelBromleyVisualization,
-		params: {
-  
-		}
-	  }
-	]
-  });
-  
-  document.getElementsByClassName('visualization-toggle')[0].addEventListener('click', function(){
-	if( this.classList.contains( 'visualization-off' ) ){
-	  this.classList.remove('visualization-off');
-	  this.classList.add('visualization-on');
-	  document.getElementById('large-now-playing-album-art').style.display = 'none';
-	  document.getElementById('large-visualization').style.display = 'block';
-	}else{
-	  this.classList.remove('visualization-on');
-	  this.classList.add('visualization-off');
-	  document.getElementById('large-now-playing-album-art').style.display = 'block';
-	  document.getElementById('large-visualization').style.display = 'none';
-	}
-  });
-  
-  
-  document.getElementsByClassName('arrow-up-icon')[0].addEventListener('click', function(){
-	document.getElementById('visualizations-player-playlist').style.display = 'block';
-  });
-  
-  document.getElementsByClassName('arrow-down-icon')[0].addEventListener('click', function(){
-	document.getElementById('visualizations-player-playlist').style.display = 'none';
-  });
-</script>  
 
+    <script type="text/javascript">
+      // --- Utility: Fetch JSON from URL ---
+      function fetchJson(url) {
+        return fetch(url).then(response => {
+          if (!response.ok) throw new Error("GitHub API fetch failed");
+          return response.json();
+        });
+      }
+
+      // --- Main dynamic logic ---
+      (function(){
+        const owner  = "twobob";
+        const repo   = "Hobo";
+        const branch = "main";
+        const folder = "soundcloud/";
+        const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/`;
+        const coverArt = "https://github.com/twobob/Hobo/blob/main/docs/art/nods%20of%20the%20synod.jpg?raw=true";
+        const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+
+        fetchJson(treeUrl).then(data => {
+          if (!data.tree) {
+            console.error("Unexpected response structure:", data);
+            return;
+          }
+
+          const songs = [];
+
+          for (const entry of data.tree) {
+            if (entry.type === "blob" && entry.path.startsWith(folder) && entry.path.toLowerCase().endsWith(".mp3")) {
+              const filePath = entry.path;
+              const url = rawBase + encodeURIComponent(filePath).replace(/%2F/g, "/");
+              let name = filePath.substring(folder.length).replace(/[-_]+/g, " ").replace(/\.mp3$/i, "").trim();
+
+              songs.push({
+                "name": name,
+                "artist": "twobob",
+                "album": "twobob n friends",
+                "url": url,
+                "cover_art_url": coverArt
+              });
+            }
+          }
+
+          if (songs.length === 0) {
+            console.warn("No MP3 files found in", folder);
+            return;
+          }
+
+          console.log(`Loaded ${songs.length} tracks from GitHub:`, songs.map(s => s.name));
+
+          // --- Initialize AmplitudeJS ---
+          Amplitude.init({
+            bindings: { 37: 'prev', 39: 'next', 32: 'play_pause' },
+            debug: true,
+            visualization: 'michaelbromley_visualization',
+            songs: songs,
+            waveforms: { sample_rate: 50 },
+            visualizations: [
+              {
+                object: MichaelBromleyVisualization,
+                params: {}
+              }
+            ]
+          });
+        }).catch(err => {
+          console.error("Error fetching track list:", err);
+        });
+
+        // --- Visualization Toggle Logic ---
+        document.addEventListener("DOMContentLoaded", () => {
+          const visToggle = document.querySelector('.visualization-toggle');
+          const albumArt  = document.getElementById('large-now-playing-album-art');
+          const vis       = document.getElementById('large-visualization');
+          const upArrow   = document.querySelector('.arrow-up-icon');
+          const downArrow = document.querySelector('.arrow-down-icon');
+          const playlist  = document.getElementById('visualizations-player-playlist');
+
+          if (visToggle) {
+            visToggle.addEventListener('click', function(){
+              const on = this.classList.toggle('visualization-on');
+              this.classList.toggle('visualization-off', !on);
+              albumArt.style.display = on ? 'none' : 'block';
+              vis.style.display = on ? 'block' : 'none';
+            });
+          }
+
+          if (upArrow) upArrow.addEventListener('click', () => playlist.style.display = 'block');
+          if (downArrow) downArrow.addEventListener('click', () => playlist.style.display = 'none');
+        });
+      })();
+    </script>
   </body>
 </html>
