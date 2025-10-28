@@ -500,64 +500,6 @@ a.learn-more{
 
 </style>
 
-      
-        <script type="text/javascript">
-Amplitude.init({
-	bindings: {
-	  37: 'prev',
-	  39: 'next',
-	  32: 'play_pause'
-	},
-	debug: true,
-	visualization: 'michaelbromley_visualization',
-	songs: [
-	  {
-		"name": "Experimental",
-		"artist": "twobob",
-		"album": "Ask The twobob",
-		"url": "https://github.com/twobob/Hobo/blob/main/soundcloud/'Mind%20Heart%20Body'%20%20Feat.%20Daria%20Black%20(Club%20Mix)%20%20%20%20Preview%20Version.mp3?raw=true",
-		"cover_art_url": "https://github.com/twobob/Hobo/blob/main/docs/art/1980%20and%20a%20half.jpg",
-		"visualization": "michaelbromley_visualization"
-	  }
-	],
-  
-	waveforms: {
-		sample_rate: 50
-	},
-  
-	visualizations: [
-	  {
-		object: MichaelBromleyVisualization,
-		params: {
-  
-		}
-	  }
-	]
-  });
-  
-  document.getElementsByClassName('visualization-toggle')[0].addEventListener('click', function(){
-	if( this.classList.contains( 'visualization-off' ) ){
-	  this.classList.remove('visualization-off');
-	  this.classList.add('visualization-on');
-	  document.getElementById('large-now-playing-album-art').style.display = 'none';
-	  document.getElementById('large-visualization').style.display = 'block';
-	}else{
-	  this.classList.remove('visualization-on');
-	  this.classList.add('visualization-off');
-	  document.getElementById('large-now-playing-album-art').style.display = 'block';
-	  document.getElementById('large-visualization').style.display = 'none';
-	}
-  });
-  
-  
-  document.getElementsByClassName('arrow-up-icon')[0].addEventListener('click', function(){
-	document.getElementById('visualizations-player-playlist').style.display = 'block';
-  });
-  
-  document.getElementsByClassName('arrow-down-icon')[0].addEventListener('click', function(){
-	document.getElementById('visualizations-player-playlist').style.display = 'none';
-  });
-</script>  
 
     
   </head>
@@ -750,11 +692,64 @@ Amplitude.init({
         </linearGradient>
       </defs>
     </svg>
-    <!--
-      Include UX functions JS
+	        
+        <script type="text/javascript">
+Amplitude.init({
+	bindings: {
+	  37: 'prev',
+	  39: 'next',
+	  32: 'play_pause'
+	},
+	debug: true,
+	visualization: 'michaelbromley_visualization',
+	songs: [
+	  {
+		"name": "Experimental",
+		"artist": "twobob",
+		"album": "Ask The twobob",
+		"url": "https://github.com/twobob/Hobo/blob/main/soundcloud/'Mind%20Heart%20Body'%20%20Feat.%20Daria%20Black%20(Club%20Mix)%20%20%20%20Preview%20Version.mp3?raw=true",
+		"cover_art_url": "https://github.com/twobob/Hobo/blob/main/docs/art/1980%20and%20a%20half.jpg",
+		"visualization": "michaelbromley_visualization"
+	  }
+	],
+  
+	waveforms: {
+		sample_rate: 50
+	},
+  
+	visualizations: [
+	  {
+		object: MichaelBromleyVisualization,
+		params: {
+  
+		}
+	  }
+	]
+  });
+  
+  document.getElementsByClassName('visualization-toggle')[0].addEventListener('click', function(){
+	if( this.classList.contains( 'visualization-off' ) ){
+	  this.classList.remove('visualization-off');
+	  this.classList.add('visualization-on');
+	  document.getElementById('large-now-playing-album-art').style.display = 'none';
+	  document.getElementById('large-visualization').style.display = 'block';
+	}else{
+	  this.classList.remove('visualization-on');
+	  this.classList.add('visualization-off');
+	  document.getElementById('large-now-playing-album-art').style.display = 'block';
+	  document.getElementById('large-visualization').style.display = 'none';
+	}
+  });
+  
+  
+  document.getElementsByClassName('arrow-up-icon')[0].addEventListener('click', function(){
+	document.getElementById('visualizations-player-playlist').style.display = 'block';
+  });
+  
+  document.getElementsByClassName('arrow-down-icon')[0].addEventListener('click', function(){
+	document.getElementById('visualizations-player-playlist').style.display = 'none';
+  });
+</script>  
 
-      NOTE: These are for handling things outside of the scope of AmplitudeJS
-    -->
-    <script type="text/javascript" src="js/functions.js"></script>
   </body>
 </html>
