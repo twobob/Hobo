@@ -229,6 +229,69 @@
         display: block;
       }
 
+      /* Volume control styles */
+      div.volume-container {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      div.volume-icon {
+        width: 20px;
+        height: 20px;
+        background: url("https://amplitude-cdn.serversideup.net/img/examples/visualizations/volume.svg") no-repeat center;
+        background-size: contain;
+        opacity: 0.7;
+      }
+
+      input[type="range"].amplitude-volume-slider {
+        width: 100px;
+        -webkit-appearance: none;
+        background-color: inherit;
+        height: 4px;
+      }
+
+      input[type="range"].amplitude-volume-slider:focus {
+        outline: none;
+      }
+
+      input[type="range"].amplitude-volume-slider::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        cursor: pointer;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      input[type="range"].amplitude-volume-slider::-webkit-slider-thumb {
+        width: 14px;
+        height: 14px;
+        background-color: white;
+        border-radius: 50%;
+        -webkit-appearance: none;
+        margin-top: -5px;
+        cursor: pointer;
+      }
+
+      input[type="range"].amplitude-volume-slider::-moz-range-track {
+        width: 100%;
+        height: 4px;
+        cursor: pointer;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      input[type="range"].amplitude-volume-slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        background-color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+      }
+
       input[type="range"]#global-large-song-slider {
         width: 100%;
         margin-top: -74px;
@@ -514,6 +577,12 @@
           <div class="amplitude-next"></div>
         </div>
 
+        <div class="volume-container">
+          <div class="volume-icon"></div>
+          <input type="range" class="amplitude-volume-slider" step="1"/>
+          <span class="volume-percentage" style="color: white; font-size: 12px; min-width: 35px; text-align: right;">100%</span>
+        </div>
+
         <div class="song-navigation">
           <input type="range" class="amplitude-song-slider"/>
         </div>
@@ -670,6 +739,20 @@
 
           if (upArrow) upArrow.addEventListener('click', () => playlist.style.display = 'block');
           if (downArrow) downArrow.addEventListener('click', () => playlist.style.display = 'none');
+
+          // Volume percentage display
+          const volumeSlider = document.querySelector('.amplitude-volume-slider');
+          const volumePercentage = document.querySelector('.volume-percentage');
+          
+          if (volumeSlider && volumePercentage) {
+            // Set initial volume display
+            volumePercentage.textContent = Math.round(Amplitude.getVolume()) + '%';
+            
+            // Update percentage when volume changes
+            volumeSlider.addEventListener('input', function() {
+              volumePercentage.textContent = this.value + '%';
+            });
+          }
         });
 
         // Responsive scaling logic
